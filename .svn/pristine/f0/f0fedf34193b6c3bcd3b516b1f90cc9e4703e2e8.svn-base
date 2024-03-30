@@ -1,0 +1,66 @@
+package restaurant.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.ibatis.exceptions.PersistenceException;
+import org.apache.ibatis.session.SqlSession;
+
+import util.MyBatisUtil;
+import restaurant.vo.RestaurantVO;
+
+public class RestaurantDaoImpl implements RestaurantDao {
+
+	private static RestaurantDao singleTon = null;
+
+	private RestaurantDaoImpl() {
+	};
+
+	public static RestaurantDao getInstance() {
+		if (singleTon == null) {
+			singleTon = new RestaurantDaoImpl();
+		}
+		return singleTon;
+	}
+
+	@Override
+	public RestaurantVO displayDeatils(int rstrntCode) {
+		
+		SqlSession sqlSession = MyBatisUtil.getInstance(true);
+		
+		RestaurantVO rv = new RestaurantVO();
+		
+		try {
+			rv = sqlSession.selectOne("restaurant.getRestaurant", rstrntCode);
+			
+		}catch(PersistenceException ex) {
+			ex.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		
+		return rv;
+	}
+
+	@Override
+	public RestaurantVO getLocal(int rstrntCode) {
+		
+		RestaurantVO rv = new RestaurantVO();
+		
+		SqlSession sqlSession = MyBatisUtil.getInstance();
+		
+		try {
+			
+			rv = sqlSession.selectOne("restaurant.getLocal", rstrntCode);
+			
+		}catch(PersistenceException ex) {
+			ex.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		
+		return rv;
+	}
+
+	
+}

@@ -1,0 +1,11 @@
+package admin.service;
+
+import java.util.List;
+
+import admin.vo.CmmntyVO;
+
+public interface IReportService {
+
+	List<CmmntyVO> getReportPostList();
+
+}

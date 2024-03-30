@@ -1,0 +1,60 @@
+package mypage.util;
+
+import java.io.File;
+import java.io.IOException;
+
+import javax.servlet.http.Part;
+
+import mypage.service.IMypageService;
+import mypage.service.MypageServiceImple;
+import mypage.vo.ProfileImgVO;
+
+
+public class FileUtil {
+
+	public static int prfileImgUpload(Part part, String myId) throws IOException {
+		
+		IMypageService mypageSerivce = MypageServiceImple.getInstance();
+		String ImgCours = "D:\\D_setting\\A_TeachingMaterial\\04_MiddelProject\\workspace\\TasteMap\\WebContent\\";
+		String profileImgCours = "imgsource/profile/"+myId;
+		File uploadDir = new File(ImgCours + profileImgCours);
+		
+		
+		if(!uploadDir.exists()) {
+			System.out.println(uploadDir);
+		    System.out.println("폴더가 없어서 생성합니다: " + uploadDir.getAbsolutePath());
+		    boolean created = uploadDir.mkdir();
+		    System.out.println("폴더 생성 성공 여부: " + created);
+//			uploadDir.mkdir();
+		}
+		
+		
+		// Part에서 파일 이름 추출
+		
+			String profileImgName = getSubmittedFileName(part);
+			
+			String profileImgExstn = profileImgName.substring(profileImgName.lastIndexOf("."),profileImgName.length());
+			// 이미지를 지정된 경로에 저장
+			part.write(ImgCours+profileImgCours + File.separator + profileImgName);
+			
+			
+			ProfileImgVO img = new ProfileImgVO(profileImgName, profileImgCours, profileImgExstn);
+			
+			mypageSerivce.cstmrProfileImgInsert(img);
+			int profileImgNo = mypageSerivce.cstmrProfileImgGet(img);
+			
+			
+			return profileImgNo;
+		
+	}
+	
+	public static String getSubmittedFileName(Part part) {
+        // Part에서 파일 이름 추출
+        for (String content : part.getHeader("content-disposition").split(";")) {
+            if (content.trim().startsWith("filename")) {
+                return content.substring(content.indexOf('=') + 1).trim().replace("\"", "");
+            }
+        }
+        return null;
+    }
+}

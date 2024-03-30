@@ -1,0 +1,9 @@
+package restaurant.service;
+
+import restaurant.vo.FavortieVO;
+
+public interface FavortieService {
+	
+	public FavortieVO displayFavortie(int favortieNo);
+
+}

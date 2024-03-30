@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="notice">
+
+
+<select id="selectNoticeList" resultType="admin.vo.NoticeVO">
+
+		select notice_code as noticeCode,
+			  notice_title as noticeTitle,
+			  notice_content as noticeContent,
+			  notice_date as noticeDate,
+			  notice_count as noticeCount
+		from notice
+		order by notice_date desc
+</select>
+
+<select id="selectNoticeDetail" resultType="admin.vo.NoticeVO" parameterType="int">
+
+			select notice_code as noticeCode,
+			  		notice_title as noticeTitle,
+			  		notice_content as noticeContent,
+					notice_date as noticeDate,
+					notice_count as noticeCount
+			from notice
+			where notice_code = #{code}
+</select>
+
+<update id="updateNoticeCount">
+
+	update notice
+	set notice_count = notice_count+1
+	where notice_code = #{code}
+	
+</update>
+
+<insert id="insertNotice"  parameterType="admin.vo.NoticeVO">
+
+	insert into notice(notice_code, notice_title, notice_content)
+	values (notice_sequence.nextval, #{noticeTitle}, #{noticeContent})
+
+
+
+</insert>
+
+<delete id="deleteNotice" parameterType="int">
+
+	
+	delete from notice
+	where notice_code=#{code}
+
+
+
+</delete>
+
+<insert id="updateNotice"  parameterType="admin.vo.NoticeVO">
+
+	update notice
+	set notice_title=#{noticeTitle}, notice_content=#{noticeContent}
+	where notice_code=#{noticeCode}
+
+
+</insert>
+
+</mapper>

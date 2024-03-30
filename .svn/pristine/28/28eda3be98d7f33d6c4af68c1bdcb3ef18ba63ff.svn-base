@@ -1,0 +1,25 @@
+package restaurant.dao;
+
+import java.util.List;
+
+import mypage.vo.ReviewVO;
+import restaurant.vo.BusinessVO;
+import restaurant.vo.MenuVO;
+import restaurant.vo.RestaurantVO;
+
+public interface RestaurantDao {
+
+	RestaurantVO displayDeatils(int rstrntCode);
+
+	RestaurantVO getLocal(int rstrntCode);
+
+	int insertReview(ReviewVO reviewVO);
+
+	ReviewVO getReview(ReviewVO reviewVO);
+
+
+	BusinessVO displayBsn(int rstrntCode);
+
+	List<MenuVO> displayMenu(int rstrntCode);
+	
+}

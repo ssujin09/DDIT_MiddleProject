@@ -1,0 +1,15 @@
+package restaurant.dao;
+
+import java.util.List;
+
+import restaurant.vo.RestaurantVO;
+
+public interface RestaurantDao {
+
+	RestaurantVO displayDeatils(int rstrntCode);
+
+	RestaurantVO getLocal(int rstrntCode);
+
+
+	
+}

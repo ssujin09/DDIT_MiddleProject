@@ -1,0 +1,125 @@
+<%@page import="mypage.service.MypageServiceImple"%>
+<%@page import="mypage.service.IMypageService"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<%
+	IMypageService mypageService = MypageServiceImple.getInstance();
+%>
+</head>
+<body>
+	<div class="col-lg-9 col-md-12 col-12">
+		<div class="main-content">
+			<div class="dashboard-block mt-0">
+				<h3 class="block-title">내 게시글</h3>
+				<nav class="list-nav">
+					<ul>
+									<li class="active"><a href="<%=request.getContextPath()%>/mypage/freeboard.do?active=myPost">게시글목록<span>
+									<%if(communityList != null) {%>
+									<%=communityList.size()%>
+									<%} else {%>
+									0
+									<%} %>
+									</span>
+									</a></li>
+									<li ><a href="<%=request.getContextPath()%>/mypage/freeboard.do?active=myReview">리뷰목록 <span>
+									<%if(reviewList != null){ %>
+									<%= reviewList.size() %>
+									<%}else{%>
+									0
+									<%} %>
+									</span></a></li>
+									<li ><a href="<%=request.getContextPath()%>/mypage/freeboard.do?active=myComment">댓글목록 <span>
+									<%if(commentList != null){ %>
+									<%= commentList.size()%>
+									<%} else{%>
+									0
+									<%} %>
+									</span></a></li>
+					</ul>
+				</nav>
+				<!-- Start Items Area -->
+				<div class="my-items">
+					<!-- Start Item List Title -->
+					<div class="item-list-title">
+						<div class="row align-items-center">
+							<div class="col-lg-5 col-md-5 col-12">
+								<p>제목</p>
+							</div>
+							<div class="col-lg-2 col-md-2 col-12">
+								<p>작성자</p>
+							</div>
+							<div class="col-lg-2 col-md-2 col-12">
+								<p>작성일</p>
+							</div>
+							<div class="col-lg-3 col-md-3 col-12 align-right">
+								<p>작업</p>
+							</div>
+						</div>
+					</div>
+					<!-- End List Title -->
+					<!-- Start Single List -->
+					<!-- 작성중 -->
+					<%
+								if (communityList != null) {
+									for (CmmntyVO cv : communityList) {
+								%>
+					<div class="single-item-list">
+						<div class="row align-items-center">
+							<div class="col-lg-5 col-md-5 col-12">
+								<div class="item-image">
+									<!-- <img src="https://via.placeholder.com/100x100" alt="#"> -->
+									<div class="content">
+										<h3 class="title">
+											<a
+												href="<%=request.getContextPath()%>/cmmnty/detail.do?cmmntyCode=<%=cv.getCmmntyCode()%>">"<%=cv.getCmmntyTitle()%>"
+											</a>
+										</h3>
+										<!-- <span class="price">$800</span> -->
+									</div>
+								</div>
+							</div>
+
+							<div class="col-lg-2 col-md-2 col-12">
+								<p>
+								<%=mypageService.getNick(cv.getCstmrId())%>
+								</p>
+							</div>
+							<div class="col-lg-2 col-md-2 col-12">
+								<p><%=cv.getCmmntyDate()%></p>
+							</div>
+							<div class="col-lg-3 col-md-3 col-12 align-right">
+								<ul class="action-btn">
+									<!-- 편집 -->
+									<li><a
+										href="<%=request.getContextPath()%>/mypage/postmodify.do?cmmntyCode=<%=cv.getCmmntyCode()%>"><i
+											class="lni lni-pencil"></i></a></li>
+									<!-- 상세보기 -->
+									<li><a
+										href="<%=request.getContextPath()%>/cmmnty/detail.do?cmmntyCode=<%=cv.getCmmntyCode()%>"><i
+											class="lni lni-eye"></i></a></li>
+									<!-- 삭제 -->
+									<li><a
+										href="<%=request.getContextPath()%>/mypage/postdelete.do?cmmntyCode=<%=cv.getCmmntyCode()%>"><i
+											class="lni lni-trash"></i></a></li>
+								</ul>
+							</div>
+
+						</div>
+					</div>
+					<%
+								}
+								}
+								%>
+				</div>
+				<!-- End Items Area -->
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<%@page import="member.vo.CustomerVO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+	
+	<%
+		CustomerVO cv = (CustomerVO) session.getAttribute("loginCode");
+		
+	
+		if(cv != null) {
+	%>
+			<%@include file="index2.html" %>
+	<% 
+			
+		} else {
+	%>
+			<%@include file="/index.html"%>
+	<%
+		}
+	
+	%>
+	
+	

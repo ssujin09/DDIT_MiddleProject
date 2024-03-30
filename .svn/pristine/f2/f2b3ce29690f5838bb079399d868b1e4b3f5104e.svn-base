@@ -1,0 +1,25 @@
+package mypage.vo;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class FavoriteVO {
+	private int favoriteNo;
+	private String cstmrId;
+	private int rstrntCode;
+	
+	public FavoriteVO() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public FavoriteVO(int favoriteNo, String cstmrId, int rstrntCode) {
+		super();
+		this.favoriteNo = favoriteNo;
+		this.cstmrId = cstmrId;
+		this.rstrntCode = rstrntCode;
+	}
+	
+	
+}

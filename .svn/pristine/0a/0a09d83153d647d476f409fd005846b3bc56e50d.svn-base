@@ -1,0 +1,942 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
+<%@page import="restaurant.vo.MenuVO"%>
+<%@page import="java.util.List"%>
+<%@page import="restaurant.vo.BusinessVO"%>
+<%@page import="restaurant.vo.RestaurantVO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+<%
+	RestaurantVO rv = (RestaurantVO) request.getAttribute("restaurant");
+String[] addressParts = (String[]) request.getAttribute("addr");
+
+BusinessVO bv = (BusinessVO) request.getAttribute("bv");
+
+List<MenuVO> menuList = (List<MenuVO>) request.getAttribute("menuList");
+System.out.print("메뉴리스트" + menuList.size());
+
+System.out.print("메뉴리스트" + menuList.size());
+%>
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<title>맛있을 지도</title>
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="shortcut icon" type="image/x-icon"
+	href="assets/images/favicon.svg" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- Web Font -->
+<link
+	href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
+	rel="stylesheet">
+
+<!-- ========================= CSS here ========================= -->
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/LineIcons.2.0.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/animate.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/tiny-slider.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/glightbox.min.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/main.css" />
+
+
+<!-- 폰트어썸 CDN -->
+<script src="https://kit.fontawesome.com/1cc7793b32.js"
+	crossorigin="anonymous"></script>
+
+<!-- jQuery CDN -->
+<script
+	src="<%=request.getContextPath()%>/assets/js/jquery-3.7.1.min.js"></script>
+
+</head>
+
+<body>
+	<!--[if lte IE 9]>
+      <p class="browserupgrade">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
+        your experience and security.
+      </p>
+    <![endif]-->
+
+	<!-- Preloader 로딩중-->
+	<div class="preloader">
+		<div class="preloader-inner">
+			<div class="preloader-icon">
+				<span></span> <span></span>
+			</div>
+		</div>
+	</div>
+	<!-- /End Preloader -->
+
+	<!-- Start Header Area -->
+	<header class="header navbar-area">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg-12">
+					<div class="nav-inner">
+						<nav class="navbar navbar-expand-lg">
+							<a class="navbar-brand" href="index.html"> <img
+								src="${pageContext.request.contextPath}/assets/images/logo/맛있을지도로고.png"
+								alt="Logo">
+							</a>
+							<button class="navbar-toggler mobile-menu-btn" type="button"
+								data-bs-toggle="collapse"
+								data-bs-target="#navbarSupportedContent"
+								aria-controls="navbarSupportedContent" aria-expanded="false"
+								aria-label="Toggle navigation">
+								<span class="toggler-icon"></span> <span class="toggler-icon"></span>
+								<span class="toggler-icon"></span>
+							</button>
+							<div class="collapse navbar-collapse sub-menu-bar"
+								id="navbarSupportedContent">
+								<ul id="nav" class="navbar-nav ms-auto">
+									<li class="nav-item"><a class=" dd-menu collapsed"
+										href="javascript:void(0)" data-bs-toggle="collapse"
+										data-bs-target="#submenu-1-1"
+										aria-controls="navbarSupportedContent" aria-expanded="false"
+										aria-label="Toggle navigation">Home</a>
+										<ul class="sub-menu collapse" id="submenu-1-1">
+											<li class="nav-item"><a href="index.html">Home
+													Default</a></li>
+											<li class="nav-item"><a href="index2.html">Home
+													Version 2</a></li>
+											<li class="nav-item"><a href="index3.html">Home
+													Version 3</a></li>
+										</ul></li>
+									<li class="nav-item"><a href="category.html"
+										aria-label="Toggle navigation">Categories</a></li>
+									<li class="nav-item"><a class=" active dd-menu collapsed"
+										href="javascript:void(0)" data-bs-toggle="collapse"
+										data-bs-target="#submenu-1-3"
+										aria-controls="navbarSupportedContent" aria-expanded="false"
+										aria-label="Toggle navigation">Listings</a>
+										<ul class="sub-menu collapse" id="submenu-1-3">
+											<li class="nav-item"><a href="item-listing-grid.html">Ad
+													Grid</a></li>
+											<li class="nav-item"><a href="item-listing-list.html">Ad
+													Listing</a></li>
+											<li class="nav-item active"><a href="item-details.html">Ad
+													Details</a></li>
+										</ul></li>
+									<li class="nav-item"><a class=" dd-menu collapsed"
+										href="javascript:void(0)" data-bs-toggle="collapse"
+										data-bs-target="#submenu-1-4"
+										aria-controls="navbarSupportedContent" aria-expanded="false"
+										aria-label="Toggle navigation">Pages</a>
+										<ul class="sub-menu mega-menu collapse" id="submenu-1-4">
+											<li class="single-block">
+												<ul>
+													<li class="mega-menu-title">Essential Pages</li>
+													<li class="nav-item"><a href="about-us.html">About
+															Us</a></li>
+													<li class="nav-item"><a href="item-details.html">Ads
+															Details</a></li>
+													<li class="nav-item"><a href="post-item.html">Ads
+															Post</a></li>
+													<li class="nav-item"><a href="pricing.html">Pricing
+															Table</a></li>
+													<li class="nav-item"><a href="registration.html">Sign
+															Up</a></li>
+													<li class="nav-item"><a href="login.html">Sign In</a></li>
+													<li class="nav-item"><a href="contact.html">Contact
+															Us</a></li>
+													<li class="nav-item"><a href="faq.html">FAQ</a></li>
+													<li class="nav-item"><a href="404.html">Error Page</a></li>
+													<li class="nav-item"><a href="mail-success.html">Mail
+															Success</a></li>
+													<li class="nav-item"><a href="coming-soon.html">Comming
+															Soon</a></li>
+												</ul>
+											</li>
+											<li class="single-block">
+												<ul>
+													<li class="mega-menu-title">Dashboard</li>
+													<li class="nav-item"><a href="dashboard.html">Account
+															Overview</a></li>
+													<li class="nav-item"><a href="profile-settings.html">My
+															Profile</a></li>
+													<li class="nav-item"><a href="my-items.html">My
+															Ads</a></li>
+													<li class="nav-item"><a href="favourite-items.html">Favorite
+															Ads</a></li>
+													<li class="nav-item"><a href="post-item.html">Ad
+															post</a></li>
+													<li class="nav-item"><a href="bookmarked-items.html">Bookmarked
+															Ad</a></li>
+													<li class="nav-item"><a href="messages.html">Messages</a></li>
+													<li class="nav-item"><a href="delete-account.html">Close
+															account</a></li>
+													<li class="nav-item"><a href="invoice.html">Invoice</a></li>
+												</ul>
+											</li>
+										</ul></li>
+									<li class="nav-item"><a class=" dd-menu collapsed"
+										href="javascript:void(0)" data-bs-toggle="collapse"
+										data-bs-target="#submenu-1-5"
+										aria-controls="navbarSupportedContent" aria-expanded="false"
+										aria-label="Toggle navigation">Blog</a>
+										<ul class="sub-menu collapse" id="submenu-1-5">
+											<li class="nav-item"><a href="blog-grid-sidebar.html">Blog
+													Grid Sidebar</a></li>
+											<li class="nav-item"><a href="blog-single.html">Blog
+													Single</a></li>
+											<li class="nav-item"><a href="blog-single-sidebar.html">Blog
+													Single Sibebar</a></li>
+										</ul></li>
+								</ul>
+							</div>
+							<!-- navbar collapse -->
+							<div class="login-button">
+								<ul>
+									<li><a href="login.html"><i class="lni lni-enter"></i>
+											Login</a></li>
+									<li><a href="registration.html"><i
+											class="lni lni-user"></i> Register</a></li>
+								</ul>
+							</div>
+							<div class="button header-button">
+								<img class="btn"
+									src="${pageContext.request.contextPath}/assets/images/profile/profile.png"
+									alt="profile_img">
+							</div>
+						</nav>
+						<!-- navbar -->
+					</div>
+				</div>
+			</div>
+			<!-- row -->
+		</div>
+		<!-- container -->
+	</header>
+	<!-- End Header Area -->
+
+	<!-- Start Breadcrumbs -->
+	<div class="breadcrumbs">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg-6 col-md-6 col-12">
+					<div class="breadcrumbs-content">
+						<h1 class="page-title">가게 상세보기</h1>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-6 col-12">
+					<ul class="breadcrumb-nav">
+						<li><a href="index.html">Home</a></li>
+						<li>가게 상세보기</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Breadcrumbs -->
+
+	<!-- Start Item Details -->
+	<section class="item-details section">
+		<div class="container">
+			<div class="top-area">
+				<div class="row">
+					<div class="col-lg-6 col-md-12 col-12">
+						<div class="product-images">
+							<main id="gallery">
+								<div class="main-img">
+									<img src="https://via.placeholder.com/1200x900" id="current"
+										alt="#">
+								</div>
+								<div class="images">
+									<img src="https://via.placeholder.com/1200x900" class="img"
+										alt="#"> <img src="https://via.placeholder.com/1200x900"
+										class="img" alt="#"> <img
+										src="https://via.placeholder.com/1200x900" class="img" alt="#">
+									<img src="https://via.placeholder.com/1200x900" class="img"
+										alt="#"> <img src="https://via.placeholder.com/1200x900"
+										class="img" alt="#">
+								</div>
+							</main>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-12 col-12">
+						<div class="product-info">
+							<h2 class="title"><%=rv.getRstrntName()%></h2>
+							<div class="cert_mark">
+								<p class="check_mark">
+									<i class="fa fa-check-circle" aria-hidden="true"></i>
+								</p>
+								<p class="like_mark">
+									<i class="fa fa-gratipay" aria-hidden="true"></i>
+								</p>
+							</div>
+							<p class="location">
+								<i class="lni lni-map-marker"></i>
+								<%
+									for (String addr : addressParts) {
+								%>
+								<a href="" class="local"><%=addr%></a>
+								<!-- 해당 주소 ex) 대전 서구 월평동 db검색해서 list -->
+								<%
+									}
+								%>
+							</p>
+							<h5 class="score_avg">
+								<%
+									
+								%>
+							</h5>
+							<div class="star-wrapper">
+								<p class="starBtn">
+									<i class="fa fa-star-o" aria-hidden="true"></i>
+								</p>
+								<span class="score_starBtn">0.0</span>
+							</div>
+							<div class="list-info">
+								<h4>Informations</h4>
+								<p class="map_view">지도보기</p>
+								<ul>
+									<!-- 									<li><span><i class="fa fa-map" aria-hidden="true"></i></span> -->
+									<%-- 										<%=rv.getRstrntAddr()%></li> --%>
+									<li><span><i class="fa fa-phone" aria-hidden="true"></i></span>
+										<%=rv.getRstrntTel()%></li>
+									<li><span><i class="fa fa-tag" aria-hidden="true"></i></span>
+										<%=rv.getRstrntTag()%></li>
+								</ul>
+							</div>
+							<div class="contact-info">
+								<ul>
+									<li><a href="#" class="reservation"> <i
+											class="fa fa-calendar-plus-o" aria-hidden="true"></i> 예약 <span>reservation
+												& Get more info</span>
+									</a></li>
+									<li><a href="#" class="share open_btn"> <i
+											class="fa fa-share-square-o" aria-hidden="true"></i>
+									</a></li>
+									<!-- 									<li> -->
+									<!-- 										<div id="modal"> -->
+									<!-- 											<i class="fa fa-times close_btn" aria-hidden="true"></i> -->
+									<!-- 										</div> <button class="open_btn">모달창</button> -->
+									<!-- 									</li> -->
+								</ul>
+							</div>
+							<div class="like-mark">
+								<ul>
+									<li><a href="javascript:void(0)" class="likeBtn"><i
+											class="fa fa-heart" aria-hidden="true"></i></a></li>
+									<span id="count_like"><%=rv.getRstrntLike()%></span>
+									<li><a href="javascript:void(0)" class="bookBtn"><i
+											class="fa fa-bookmark" aria-hidden="true"></i></a></li>
+									<!--                                     <span id="count_bookmarkBtn">00</span> -->
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 24-01-11/////////////////////////////////////////////////////////////////////// -->
+			<div class="item-details-blocks">
+				<div class="row">
+					<div class="col-lg-8 col-md-7 col-12">
+						<!-- Start Single Block -->
+						<div class="single-block description time_OL">
+							<div class="OLState">
+								<h3 class="time">영업시간</h3>
+								<p class="open">OPEN</p>
+								<p class="close">CLOSE</p>
+								<i class="fa fa-clock-o" aria-hidden="true"></i>
+							</div>
+							<ul class="details-list">
+								<!-- <li class="day">월요일</li> -->
+								<li class="time">오픈시간 : <%=bv.getBsnOpentime()%></li>
+								<li class="time">마감시간 : <%=bv.getBsnClosetime()%></li>
+								<li class="time additional-info">휴게시간 : <%=bv.getBsnReststart()%>
+									~ <%=bv.getBsnRestfinish()%></li>
+							</ul>
+						</div>
+						<!-- End Single Block -->
+						<!-- Start Single Block -->
+						<!-- <div class="single-block tags">
+                            <h3>Tags</h3>
+                            <ul>
+                                <li><a href="javascript:void(0)">Bike</a></li>
+                                <li><a href="javascript:void(0)">Services</a></li>
+                                <li><a href="javascript:void(0)">Brand</a></li>
+                                <li><a href="javascript:void(0)">Popular</a></li>
+                            </ul>
+                        </div> -->
+						<!-- End Single Block -->
+
+
+						<!-- /////////////////////////////////////////////////////////////////////// -->
+
+						<!-- 2021-01-14 여기부터1!!!!!/////////////////////////////////////////////////////////////////////// -->
+						<!-- Start Single Block -->
+						<div class="single-block menu_box">
+							<div class="menu_info">
+								<h3>메뉴정보</h3>
+								<div class="menu_list">
+									<table>
+										<%
+											int displayMenuCount = 10;
+										for (int i = 0; i < Math.min(menuList.size(), displayMenuCount); i++) {
+											MenuVO mv = menuList.get(i);
+										%>
+
+
+
+
+										<tr class="menu_iist_box">
+											<td class="menu_food"><%=mv.getMenuName()%></td>
+											<td class="menu_line">
+												----------------------------------------------------------------------------------------------------------------------------------------------------
+											</td>
+											<td class="menu_price"><%=mv.getMenuPrice()%></td>
+										</tr>
+
+										<%
+											}
+										%>
+
+										<!-- 										<button class="menu_more_btn menu_more_btn on"> -->
+										<!-- 											더보기 -->
+										<!-- 										</button> -->
+										<!-- 										<div class="menu_list menu_list_detail"></div> -->
+
+
+									</table>
+								</div>
+							</div>
+						</div>
+						<!-- End Single Block -->
+						<!-- Start Single Block -->
+						<div class="single-block comments visitor_review">
+							<h3 class="visitor_review_title">방문자 리뷰</h3>
+							<!-- 2024-01-16 작성 -->
+							<div class="review_input">
+								<a href="#">리뷰등록하기</a>
+							</div>
+							<div class="visitor_review_starBtn">
+								<ul class="visitor_review_starBtn_content">
+									<li class="visitor_review_starBtn_title">평점 0점</li>
+									<li class="visitor_review_starBtn_content_i"><i
+										class="fa fa-star-o" aria-hidden="true"></i> <i
+										class="fa fa-star-o" aria-hidden="true"></i> <i
+										class="fa fa-star-o" aria-hidden="true"></i> <i
+										class="fa fa-star-o" aria-hidden="true"></i> <i
+										class="fa fa-star-o" aria-hidden="true"></i></li>
+								</ul>
+								<ul class="visitor_review_starBtn_op">
+									<span>맛 <i class="fa fa-star" aria-hidden="true"></i>
+									</span>
+									<span>가격 <i class="fa fa-star" aria-hidden="true"></i>
+									</span>
+									<span>서비스 <i class="fa fa-star" aria-hidden="true"></i>
+									</span>
+								</ul>
+							</div>
+							<div class="visitor_review_tags">
+								<ul class="visitor_review_purpose1">
+									<il class="visitor_review_purpose_title1">방문목적</il>
+									<il class="tag1">tag1</il>
+									<il class="tag2">tag2</il>
+									<il class="visitor_review_purpose_moreBtn more-btn on">더보기</il>
+								</ul>
+								<!-- <ul class="more_review_tag">
+                                    <li class="tag3">tag3</li>
+                                    <li class="tag4">tag4</li>
+                                </ul> -->
+								<ul class="visitor_review_purpose2">
+									<il class="visitor_review_purpose_title2">분위기</il>
+									<il class="tag1">tag1</il>
+									<il class="tag2">tag2</il>
+									<il class="visitor_review_purpose_moreBtn more-btn on">더보기</il>
+								</ul>
+								<!-- <ul class="more_review_tag">
+                                    <li class="tag3">tag3</li>
+                                    <li class="tag4">tag4</li>
+                                </ul> -->
+							</div>
+
+							<!-- Start Single Comment -->
+							<!-- <a href="javascript:void(0)" class="reply">리뷰작성하기</a> -->
+							<div class="single-comment visitor_review_comment">
+								<div class="visitor_review_content">
+									<div class="visitor_review_review_comment_box">
+										<img src="assets/images/profile/profile_default.png" alt="#">
+										<h4>닉네임</h4>
+										<div class="visitor_review_content_icon">
+											<div class="visitor_review_content_ds">
+												<div class="visitor_review_content_star">
+													<i class="fa fa-star-o" aria-hidden="true"></i> <i
+														class="fa fa-star-o" aria-hidden="true"></i> <i
+														class="fa fa-star-o" aria-hidden="true"></i> <i
+														class="fa fa-star-o" aria-hidden="true"></i> <i
+														class="fa fa-star-o" aria-hidden="true"></i>
+												</div>
+												<div class="visitor_review_content_day">2024. 01. 14</div>
+											</div>
+											<div class="visitor_review_content_op">
+												<span>맛 <i class="fa fa-star" aria-hidden="true"></i>
+												</span> <span>가격 <i class="fa fa-star" aria-hidden="true"></i>
+												</span> <span>서비스 <i class="fa fa-star" aria-hidden="true"></i>
+												</span>
+											</div>
+										</div>
+
+										<div class="visitor_review_content_it">
+											<span class="visitor_review_content_img">img</span>
+											<p class="visitor_review_text">There are many variations
+												of passages of Lorem Ipsum available, but the majority have
+												suffered alteration in some form, by injected humour, or
+												randomised words which don't look even slightly believable.
+											</p>
+										</div>
+										<div class="visitor_review_content_tag">
+											<il class="visitor_review_content_tag1">tag1</il>
+											<il class="visitor_review_content_tag2">tag2</il>
+											<il class="visitor_review_content_tag3">tag3</il>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End Single Comment -->
+						</div>
+						<!-- End Single Block -->
+
+						<!-- Start Single Block -->
+						<div class="single-block comment-form">
+							<h3>블로그 리뷰</h3>
+							<div class="blog_form">
+								<ul>
+									<li class="blog_review_title">제목</li>
+									<li class="blog_review_content">There are many variations
+										of passages of Lorem Ipsum available, but the majority have
+										suffered alteration in some form, by injected humour, or
+										randomised words which don't look even slightly believable.</li>
+									<div class="blog_review_nt">
+										<li class="blog_review_name">작성자</li>
+										<li class="blog_review_date">2021-01-17</li>
+									</div>
+								</ul>
+								<ul>
+									<li class="blog_review_title">제목</li>
+									<li class="blog_review_content">There are many variations
+										of passages of Lorem Ipsum available, but the majority have
+										suffered alteration in some form, by injected humour, or
+										randomised words which don't look even slightly believable.</li>
+									<div class="blog_review_nt">
+										<li class="blog_review_name">작성자</li>
+										<li class="blog_review_date">2021-01-17</li>
+									</div>
+								</ul>
+								<ul>
+									<li class="blog_review_title">제목</li>
+									<li class="blog_review_content">There are many variations
+										of passages of Lorem Ipsum available, but the majority have
+										suffered alteration in some form, by injected humour, or
+										randomised words which don't look even slightly believable.</li>
+									<div class="blog_review_nt">
+										<li class="blog_review_name">작성자</li>
+										<li class="blog_review_date">2021-01-17</li>
+									</div>
+								</ul>
+								<ul>
+									<li class="blog_review_title">제목</li>
+									<li class="blog_review_content">There are many variations
+										of passages of Lorem Ipsum available, but the majority have
+										suffered alteration in some form, by injected humour, or
+										randomised words which don't look even slightly believable.</li>
+									<div class="blog_review_nt">
+										<li class="blog_review_name">작성자</li>
+										<li class="blog_review_date">2021-01-17</li>
+									</div>
+								</ul>
+								<ul>
+									<li class="blog_review_title">제목</li>
+									<li class="blog_review_content">There are many variations
+										of passages of Lorem Ipsum available, but the majority have
+										suffered alteration in some form, by injected humour, or
+										randomised words which don't look even slightly believable.</li>
+									<div class="blog_review_nt">
+										<li class="blog_review_name">작성자</li>
+										<li class="blog_review_date">2021-01-17</li>
+									</div>
+								</ul>
+
+							</div>
+							<form action="#" method="POST">
+								<div class="row"></div>
+							</form>
+						</div>
+						<!-- End Single Block -->
+					</div>
+					<div class="col-lg-4 col-md-5 col-12">
+						<div class="item-details-sidebar">
+							<!-- Start Single Block -->
+							<!-- <div class="single-block author">
+                                <h3>Author</h3>
+                                <div class="content">
+                                    <img src="https://via.placeholder.com/200x200" alt="#">
+                                    <h4>Miliya Jessy</h4>
+                                    <span>Member Since May 15,2023</span>
+                                    <a href="javascript:void(0)" class="see-all">See All Ads</a>
+                                </div>
+                            </div> -->
+							<!-- End Single Block -->
+							<!-- 							Start Single Block -->
+							<div class="single-block content-seller comment-form">
+								<h3>가게에서 진행중인 모임</h3>
+								<div class="meeting_info-container">
+									<i class="fa fa-chevron-left" id="prevMeeting"
+										aria-hidden="true"></i>
+									<div class="meeting_info-list">
+										<div class="meeting_info in_fo1">
+											<p class="meeting_title">제목1</p>
+											<p class="meeting_region">지역1</p>
+											<p class="meeting_date">날짜1시간1</p>
+											<p class="meeting_time"></p>
+											<button class="meeting_detile meeting_modal">자세히보기</button>
+										</div>
+										<div class="meeting_info in_fo2">
+											<p class="meeting_title">제목2</p>
+											<p class="meeting_region">지역2</p>
+											<p class="meeting_date">날짜2시간2</p>
+											<p class="meeting_time"></p>
+											<button class="meeting_detile meeting_modal">자세히보기</button>
+										</div>
+										<div class="meeting_info in_fo3">
+											<p class="meeting_title">제목3</p>
+											<p class="meeting_region">지역3</p>
+											<p class="meeting_date">날짜3시간3</p>
+											<p class="meeting_time"></p>
+											<button class="meeting_detile meeting_modal">자세히보기</button>
+										</div>
+									</div>
+									<i class="fa fa-chevron-right" id="nextMeeting"
+										aria-hidden="true"></i>
+
+									<div id="meeting_modal_detail">
+										<div class="meeting_modal_top">
+											<span class="meeting_modal_title">제목</span> <i
+												class="fa fa-times close_btn" aria-hidden="true"></i>
+										</div>
+										<div class="meeting_modal_text">
+											<span>모임지역</span> <span>모임인원수</span> <span>모임날짜 모임시간</span> <span>나이제한</span>
+											<span>모임 코멘트</span> <span class="meeting_go">참여하기</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End Single Block -->
+							<!-- Start Single Block -->
+							<div class="single-block ">
+								<h3 class="map_h3" style="font-size: 18px;">지도</h3>
+								<div id="map" style="width: 320px; height: 300px; margin: 0 auto"></div>
+								<!-- 								<div class="mapouter">
+									<div class="gmap_canvas">
+										<iframe width="100%" height="300" id="gmap_canvas"
+											src="https://maps.google.com/maps?q=2880%20Broadway,%20New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed"
+											frameborder="0" scrolling="no" marginheight="0"
+											marginwidth="0"></iframe>
+										<a href="https://putlocker-is.org"></a><br>
+										<style>
+.mapouter {
+	position: relative;
+	text-align: right;
+	height: 300px;
+	width: 100%;
+}
+</style>
+										<a href="https://www.embedgooglemap.net">google map code
+											for website</a>
+										<style>
+.gmap_canvas {
+	overflow: hidden;
+	background: none !important;
+	height: 300px;
+	width: 100%;
+}
+</style>
+									</div>
+								</div> -->
+							</div>
+							<!-- End Single Block -->
+						</div>
+					</div>
+
+
+				</div>
+	</section>
+	<!-- End Item Details -->
+
+	<!-- Start Newsletter Area -->
+	<div class="newsletter section">
+		<div class="container">
+			<div class="inner-content">
+				<div class="row align-items-center">
+					<div class="col-lg-6 col-md-6 col-12">
+						<div class="title">
+							<i class="lni lni-alarm"></i>
+							<h2>Newsletter</h2>
+							<p>We don't send spam so don't worry.</p>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-12">
+						<div class="form">
+							<form action="#" method="get" target="_blank"
+								class="newsletter-form">
+								<input name="EMAIL" placeholder="Your email address"
+									type="email">
+								<div class="button">
+									<button class="btn">
+										Subscribe<span class="dir-part"></span>
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Newsletter Area -->
+
+	<!-- Start Footer Area -->
+	<footer class="footer">
+		<!-- Start Footer Top -->
+		<div class="footer-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 col-md-6 col-12">
+						<!-- Single Widget -->
+						<div class="single-footer mobile-app">
+							<h3>Mobile Apps</h3>
+							<div class="app-button">
+								<a href="javascript:void(0)" class="btn"> <i
+									class="lni lni-play-store"></i> <span class="text"> <span
+										class="small-text">Get It On</span> Google Play
+								</span>
+								</a> <a href="javascript:void(0)" class="btn"> <i
+									class="lni lni-apple"></i> <span class="text"> <span
+										class="small-text">Get It On</span> App Store
+								</span>
+								</a>
+							</div>
+						</div>
+						<!-- End Single Widget -->
+					</div>
+					<div class="col-lg-3 col-md-6 col-12">
+						<!-- Single Widget -->
+						<div class="single-footer f-link">
+							<h3>Locations</h3>
+							<div class="row">
+								<div class="col-lg-6 col-md-6 col-12">
+									<ul>
+										<li><a href="javascript:void(0)">Chicago</a></li>
+										<li><a href="javascript:void(0)">New York City</a></li>
+										<li><a href="javascript:void(0)">San Francisco</a></li>
+										<li><a href="javascript:void(0)">Washington</a></li>
+										<li><a href="javascript:void(0)">Boston</a></li>
+									</ul>
+								</div>
+								<div class="col-lg-6 col-md-6 col-12">
+									<ul>
+										<li><a href="javascript:void(0)">Los Angeles</a></li>
+										<li><a href="javascript:void(0)">Seattle</a></li>
+										<li><a href="javascript:void(0)">Las Vegas</a></li>
+										<li><a href="javascript:void(0)">San Diego</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<!-- End Single Widget -->
+					</div>
+					<div class="col-lg-3 col-md-6 col-12">
+						<!-- Single Widget -->
+						<div class="single-footer f-link">
+							<h3>Quick Links</h3>
+							<ul>
+								<li><a href="javascript:void(0)">About Us</a></li>
+								<li><a href="javascript:void(0)">How It's Works</a></li>
+								<li><a href="javascript:void(0)">Login</a></li>
+								<li><a href="javascript:void(0)">Signup</a></li>
+								<li><a href="javascript:void(0)">Help & Support</a></li>
+							</ul>
+						</div>
+						<!-- End Single Widget -->
+					</div>
+					<div class="col-lg-3 col-md-6 col-12">
+						<!-- Single Widget -->
+						<div class="single-footer f-contact">
+							<h3>Contact</h3>
+							<ul>
+								<li>23 New Design Str, Lorem Upsum 10<br> Hudson
+									Yards, USA
+								</li>
+								<li>Tel. +(123) 1800-567-8990 <br> Mail.
+									support@classigrids.com
+								</li>
+							</ul>
+						</div>
+						<!-- End Single Widget -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/ End Footer Middle -->
+		<!-- Start Footer Bottom -->
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="inner">
+					<div class="row">
+						<div class="col-12">
+							<div class="content">
+								<ul class="footer-bottom-links">
+									<li><a href="javascript:void(0)">Terms of use</a></li>
+									<li><a href="javascript:void(0)"> Privacy Policy</a></li>
+									<li><a href="javascript:void(0)">Advanced Search</a></li>
+									<li><a href="javascript:void(0)">Site Map</a></li>
+									<li><a href="javascript:void(0)">Information</a></li>
+								</ul>
+								<p class="copyright-text">
+									Designed and Developed by <a href="https://graygrids.com/"
+										rel="nofollow" target="_blank">GrayGrids</a>
+								</p>
+								<ul class="footer-social">
+									<li><a href="javascript:void(0)"><i
+											class="lni lni-facebook-filled"></i></a></li>
+									<li><a href="javascript:void(0)"><i
+											class="lni lni-twitter-original"></i></a></li>
+									<li><a href="javascript:void(0)"><i
+											class="lni lni-youtube"></i></a></li>
+									<li><a href="javascript:void(0)"><i
+											class="lni lni-linkedin-original"></i></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Footer Middle -->
+	</footer>
+	<!--/ End Footer Area -->
+
+	<!-- ========================= scroll-top ========================= -->
+	<a href="#" class="scroll-top btn-hover"> <i
+		class="lni lni-chevron-up"></i>
+	</a>
+
+	<!-- ========================= JS here ========================= -->
+	<script src="<%=request.getContextPath()%>/assets/js/bootstrap.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/wow.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/tiny-slider.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/glightbox.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/item-details.js"></script>
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5ccd00174a49121da7c06055801ba062&libraries=services"></script>
+	<script type="text/javascript">
+		//         const current = document.getElementById("current");
+		//         const opacity = 0.6;
+		//         const imgs = document.querySelectorAll(".img");
+		//         imgs.forEach(img => {
+		//             img.addEventListener("click", (e) => {
+		//                 //reset opacity
+		//                 imgs.forEach(img => {
+		//                     img.style.opacity = 1;
+		//                 });
+		//                 current.src = e.target.src;
+		//                 //adding class 
+		//                 //current.classList.add("fade-in");
+		//                 //opacity
+		//                 e.target.style.opacity = opacity;
+		//             });
+		//         });
+				
+        let mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+            mapOption = {
+                center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                level: 5 // 지도의 확대 레벨
+            };
+
+        // 지도를 생성합니다    
+        let map = new kakao.maps.Map(mapContainer, mapOption);
+
+        // 지도 이동 끄기
+        map.setDraggable(false);
+
+        // 지도 확대/축소 끄기
+        map.setZoomable(false);
+
+ /*        let mapTypeControl = new kakao.maps.MapTypeControl();
+
+        map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT); */
+
+        // let zoomControl = new kakao.maps.ZoomControl();
+        // map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+
+        // 주소-좌표 변환 객체를 생성합니다
+        let geocoder = new kakao.maps.services.Geocoder();
+
+        // 주소 정보 담은 배열 선언 후 for문 돌려서 마커 전부 찍기(객체 배열 활용)
+        // 해당 가게 지도는 주소 받아서 넣기
+        // 가게 주소 클릭 시 해당 가게 주소 넣기
+
+
+            // 주소로 좌표를 검색합니다
+            geocoder.addressSearch("<%=rv.getRstrntAddr()%>", function (result, status) {
+
+                // 정상적으로 검색이 완료됐으면 
+                if (status === kakao.maps.services.Status.OK) {
+
+                    let coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                    // 결과값으로 받은 위치를 마커로 표시합니다
+                    let marker = new kakao.maps.Marker({
+                        map: map,
+                        position: coords
+                    });
+
+                    // 인포윈도우로 장소에 대한 설명을 표시합니다
+                    let infowindow = new kakao.maps.InfoWindow({
+                        // 주소에 해당하는 가게 명 + 가게 페이지 링크 넣기
+                        content: '<div style="text-align:center;width:150px;padding:6px 0;background-color:#fff; font-size:12px; color:#5830E0; font-weight:bold;">'+"<%=rv.getRstrntName()%>"+ '</div>'
+					});
+					infowindow.open(map, marker);
+                        
+
+                    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                    map.setCenter(coords); // 처음 주소 가운데 고정시키기
+                }
+            });
+        
+<%--         let rst = <%=request.getAttribute("blog")%> --%>
+        
+//         for (let i = 0; i < rst.length; i++) {
+// 			console.log(rst[i].title);
+// 			console.log(rst[i].description);
+// 			console.log(i);
+// 		}
+        
+        
+<%--         let addr = "<%=rv.getRstrntAddr()%>; --%>
+// 		let split = addr.split(" ");
+// 		console.log(addr);
+// 		console.log(split);
+	</script>
+
+
+
+</body>
+
+</html>

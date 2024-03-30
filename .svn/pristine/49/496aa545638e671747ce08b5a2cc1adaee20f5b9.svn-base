@@ -1,0 +1,68 @@
+package restaurant.controller;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import restaurant.service.RestaurantService;
+import restaurant.service.RestaurantServiceImpl;
+import restaurant.vo.BusinessVO;
+import restaurant.vo.MenuVO;
+import restaurant.vo.RestaurantVO;
+
+@WebServlet("/restaurantDetail.do")
+public class Restaurant extends HttpServlet {
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		int rstrntCode = Integer.parseInt(req.getParameter("rstrntCode"));
+//		System.out.println(rstrntCode);
+		RestaurantService restaurantService = RestaurantServiceImpl.getInstance();
+
+		RestaurantVO rv = restaurantService.displayDeatils(rstrntCode);
+
+		//////////////////////////////////////////////////////////////////
+
+		String address = rv.getRstrntAddr();
+//		System.out.println(address);
+		String[] addressParts = address.split(" ");
+
+		String local = addressParts[0];
+
+		req.setAttribute("addr", addressParts);
+
+		String localServletURL = "localPage?local=";
+
+		String localLink = "<a href=\"" + localServletURL + "\">" + local + "</a>";
+
+		//////////////////////////////////////////////////////////////////
+
+		BusinessVO bv = restaurantService.displayBsn(rstrntCode);
+		System.out.println("rstrntCode>>>>" + rstrntCode);
+
+		//////////////////////////////////////////////////////////////////
+		
+		List<MenuVO> mv = restaurantService.displayMenu(rstrntCode);
+		
+
+		req.setAttribute("restaurant", rv);
+		req.setAttribute("localLink", localLink);
+		req.setAttribute("bv", bv);
+		req.setAttribute("mv", mv);
+
+		req.getRequestDispatcher("/views/restaurant/restaurant.jsp").forward(req, resp);
+
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doGet(req, resp);
+	}
+
+}

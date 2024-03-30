@@ -1,0 +1,151 @@
+package mypage.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.ibatis.exceptions.PersistenceException;
+import org.apache.ibatis.session.SqlSession;
+
+import community.vo.CmmntyVO;
+import member.vo.CustomerVO;
+import mypage.vo.ProfileImgVO;
+import util.MyBatisUtil;
+
+
+/**
+	 * Description : 마이페이지 DAO 인터페이스를 임플리먼트한 마이페이지 DAO
+	 * Date : 2024. 1. 11.
+	 * History :
+	 * - 작성자 : '선민수', 날짜 : 2024. 1. 11., 설명 : 최초작성
+	 * - 수정자 : 
+	 * @author pok4k
+	 */
+public class MypageDaoImpl implements IMypageDao{
+	
+	private static IMypageDao singleTon = null;
+
+	private MypageDaoImpl() {
+	};
+
+	public static IMypageDao getInstance() {
+		if (singleTon == null) {
+			singleTon = new MypageDaoImpl();
+		}
+		return singleTon;
+	}
+
+	@Override
+	public int cstmrProfileSetting(CustomerVO cv) {
+		
+		int result = 0;
+		
+		SqlSession sqlSession = MyBatisUtil.getInstance(true);
+		
+		try {
+			
+			result = sqlSession.update("mypage.cstmrProfileSetting", cv);
+			
+		} catch (PersistenceException e) {
+			sqlSession.rollback();
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return result;
+	}
+
+	@Override
+	public int cstmrProfileImgInsert(ProfileImgVO piv) {
+		
+		int result = 0;
+		
+		SqlSession sqlSession = MyBatisUtil.getInstance(true);
+		
+		try {
+			
+			result = sqlSession.insert("mypage.cstmrProfileImgInsert",piv);
+			
+			if(result > 0) {
+				sqlSession.commit();
+			}
+		}catch (PersistenceException e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		
+		return result;
+	}
+
+	@Override
+	public int cstmrProfileImgGet(ProfileImgVO img) {
+		int profileImgNo = 0;
+		
+		SqlSession sqlSession = MyBatisUtil.getInstance(true);
+		
+		try {
+			profileImgNo = sqlSession.selectOne("mypage.cstmrProfileImgGet",img);
+			if(profileImgNo > 0) {
+				sqlSession.commit();
+			}
+		}catch (PersistenceException e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		
+		return profileImgNo;
+	}
+
+	@Override
+	public ProfileImgVO profileImgInfo(int profileImgNo) {
+		ProfileImgVO img = new ProfileImgVO();
+		SqlSession sqlSession = MyBatisUtil.getInstance(true);
+		try {
+			img = sqlSession.selectOne("mypage.profileImgInfo", profileImgNo);
+		} catch (PersistenceException e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		
+		return img;
+	}
+
+
+	@Override
+	public List<CmmntyVO> getMyCommunity(String cstmrId) {
+		List<CmmntyVO> communityList = new ArrayList<CmmntyVO>();
+		SqlSession sqlSession = MyBatisUtil.getInstance(true);
+		
+		try {
+			communityList = sqlSession.selectList("mypage.getMyCommunity", cstmrId);
+		} catch (PersistenceException e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		
+		
+		
+		return communityList;
+	}
+
+
+	@Override
+	public int postDelete(int cmmntyCode) {
+		int result = 0;
+		SqlSession sqlSession = MyBatisUtil.getInstance();
+		try {
+			result = sqlSession.delete("mypage.postDelete", cmmntyCode);
+			
+			if(result>0) {
+				sqlSession.commit();
+			}
+		} catch (PersistenceException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+}

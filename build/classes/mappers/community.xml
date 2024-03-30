@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="community">
+	
+	
+	<select id="getAllCommunity" resultType="CmmntyVO" >
+		select cmmnty_code , cmmnty_title, cmmnty_content , 
+				cmmnty_date , cmmnty_count , cmmnty_like ,
+				cmmnty_report , cstmr_id 
+			from community order by cmmnty_date desc
+	</select>
+	
+	<select id="getDetailContent" resultType="CmmntyVO" > 
+	select cmmnty_code , cmmnty_title, cmmnty_content ,
+	cmmnty_date , cmmnty_count , cmmnty_like ,
+	cmmnty_report , cstmr_id
+	
+	<!-- (SELECT COUNT(1) FROM LIKES WHERE BOARD_NO = #{cmmntyCode} AND BOARD_TYPE =
+	"CMMNTY") TOTAL_LIKE
+	,
+	(SELECT COUNT(1) FROM LIKES WHERE CSTMR_ID = #{cstmrId} AND BOARD_NO =
+	#{cmmntyCode} AND BOARD_TYPE = "CMMNTY") CSTMR_LIKE -->
+	
+	from community
+	where cmmnty_code = #{cmmntyCode}
+	</select>
+	
+	<insert id="insertCmmnty" parameterType="CmmntyVO" >
+		
+		insert into community
+		(cmmnty_code , cmmnty_title, cmmnty_content , 
+		cmmnty_date , cstmr_id , cmmnty_count , cmmnty_like)
+		values
+		(CMMNTY_SEQ.nextVal, #{cmmntyTitle}, #{cmmntyContent}, SYSDATE, #{cstmrId}, 0, 0)
+	
+	</insert>
+
+
+	<update id="updateView" parameterType="int">
+
+		UPDATE COMMUNITY
+		SET CMMNTY_COUNT = CMMNTY_COUNT + 1
+		WHERE CMMNTY_CODE = #{cmmntyCode}
+
+	</update>
+	
+	<update id="upLike" parameterType="int">
+	
+	update community
+	set cmmnty_like = cmmnty_like +1
+	where cmmnty_code = #{cmmntyCode}
+			
+	</update>
+	
+	<update id="contentReport" parameterType="int">
+	
+	update community
+	set cmmnty_report = 'Y'
+	where cmmnty_code = #{cmmntyCode}
+			
+	</update>
+	
+</mapper>

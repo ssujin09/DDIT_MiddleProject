@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="commComment">
+	
+	<select id="getCommentList" parameterType="int" resultType="CommentVO">
+		select * from CommunityComment where cmmnty_code = #{cmmntyCode}
+	</select>
+	
+	<insert id="insertComment" parameterType="CommentVO" >
+		
+		insert into CommunityComment
+		(cmmnty_code, ccomment_code , ccomment_content, 
+		ccomment_date , cstmr_id)
+		values
+		(#{cmmntyCode}, CCOMMENT_CODE_SEQ.nextVal, #{ccommentContent}, SYSDATE, #{cstmrId})
+	
+	</insert>
+	
+	<select id="countComment" resultType = "int" parameterType="int">
+		select count(*) from CommunityComment where cmmnty_code = #{cmmntyCode}
+	</select>
+	
+	
+</mapper>

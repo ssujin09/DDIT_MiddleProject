@@ -1,0 +1,48 @@
+package admin.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.ibatis.exceptions.PersistenceException;
+import org.apache.ibatis.session.SqlSession;
+
+import admin.vo.RestaurantVO;
+import util.MyBatisUtil;
+
+public class RestaurantDaoImpl implements IRestaurantDao{
+
+	private static IRestaurantDao restaurantDao;
+	
+	public RestaurantDaoImpl() {
+	}
+	
+	public static IRestaurantDao getInstance() {
+		if(restaurantDao==null) {
+			restaurantDao= new RestaurantDaoImpl();
+		}
+		return restaurantDao;
+	}
+
+	@Override
+	public List<RestaurantVO> getListRstrnt(String city) {
+		
+		List<RestaurantVO> rstrntList = new ArrayList<RestaurantVO>();
+		SqlSession sqlSession = MyBatisUtil.getInstance();
+		
+		try {
+			rstrntList = sqlSession.selectList("admin.listRstrntCity", city);
+			
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		
+		return rstrntList;
+	}
+
+
+
+
+}

@@ -1,0 +1,37 @@
+package admin.service;
+
+
+import java.util.List;
+
+import admin.dao.IReportDao;
+import admin.dao.ReportDaoImpl;
+import admin.vo.CmmntyVO;
+
+
+public class ReportServiceImpl implements IReportService{
+	
+	private static IReportService reportService;
+	
+	private IReportDao reportDao;
+	
+	private ReportServiceImpl() {
+		reportDao = ReportDaoImpl.getInstance();
+	}
+	
+	public static IReportService getInstance() {
+		if(reportService == null) {
+			reportService = new ReportServiceImpl();
+		}
+		return reportService;
+	}
+
+	@Override
+	public List<CmmntyVO> getReportPostList() {
+		List<CmmntyVO> reportPostList = reportDao.getReportPostList();
+		return reportPostList;
+	}
+	
+	
+
+
+}

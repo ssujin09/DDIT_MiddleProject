@@ -1,0 +1,57 @@
+package mypage.service;
+
+import java.util.List;
+
+import community.vo.CmmntyVO;
+import community.vo.CommentVO;
+import member.vo.CustomerVO;
+import mypage.vo.FavoriteVO;
+import mypage.vo.MenuVO;
+import mypage.vo.ProfileImgVO;
+import mypage.vo.ReviewVO;
+
+/**
+	 * Description : 마이페이지 서비스를 위한 인터페이스
+	 * Date : 2024. 1. 10
+	 * History :
+	 * - 작성자 : '선민수', 날짜 : 2024. 1. 10, 설명 : 최초작성
+	 * - 수정자 : 
+	 * @author PC-09
+	 */
+public interface IMypageService {
+
+	int cstmrProfileSetting(CustomerVO cv);
+
+	List<CmmntyVO> getMyCommunity(String cstmrId);
+	
+	int cstmrProfileImgInsert(ProfileImgVO piv);
+	
+	int cstmrProfileImgGet(ProfileImgVO piv);
+	
+	ProfileImgVO profileImgInfo(int profileImgNo);
+	
+	
+	int postDelete(int cmmntyCode);
+
+	List<ReviewVO> getMyReview(String cstmrId);
+
+	int reviewDelete(int reviewNo);
+	
+	String getAddr(int rstrntCode);
+	
+	String getName(int rstrntCode);
+	
+	String getCategory(int rstrntCode);
+	
+	int countPost(String cstmrId);
+
+	List<CommentVO> getCommentList(String cstmrId);
+	
+	String getTitle(int cmmntyCode);
+	
+	int deleteCcomment(int ccommentCode);
+
+	List<FavoriteVO> favoriteRst(String cstmrId);
+	
+	MenuVO getMenu(int rstrntCode);
+}

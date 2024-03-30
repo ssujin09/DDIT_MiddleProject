@@ -1,0 +1,19 @@
+package restaurant.service;
+
+import java.util.List;
+
+import mypage.vo.ReviewVO;
+import restaurant.vo.RestaurantVO;
+
+public interface RestaurantService {
+
+	public RestaurantVO displayDeatils(int rstrntCode);
+
+	public RestaurantVO displayLocals(int rstrntCode);
+
+	public int insertReview(ReviewVO reviewVO);
+
+	public ReviewVO getReview(ReviewVO reviewVO);
+	
+
+}

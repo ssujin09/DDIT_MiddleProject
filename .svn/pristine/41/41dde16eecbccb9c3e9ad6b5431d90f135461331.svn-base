@@ -1,0 +1,31 @@
+package mypage.service;
+
+import java.util.List;
+
+import community.vo.CmmntyVO;
+import member.vo.CustomerVO;
+import mypage.vo.ProfileImgVO;
+
+/**
+	 * Description : 마이페이지 서비스를 위한 인터페이스
+	 * Date : 2024. 1. 10
+	 * History :
+	 * - 작성자 : '선민수', 날짜 : 2024. 1. 10, 설명 : 최초작성
+	 * - 수정자 : 
+	 * @author PC-09
+	 */
+public interface IMypageService {
+
+	int cstmrProfileSetting(CustomerVO cv);
+
+	List<CmmntyVO> getMyCommunity(String cstmrId);
+	
+	int cstmrProfileImgInsert(ProfileImgVO piv);
+	
+	int cstmrProfileImgGet(ProfileImgVO piv);
+	
+	ProfileImgVO profileImgInfo(int profileImgNo);
+	
+	
+	int postDelete(int cmmntyCode);
+}

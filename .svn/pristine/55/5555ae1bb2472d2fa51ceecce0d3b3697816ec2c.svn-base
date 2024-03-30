@@ -1,0 +1,62 @@
+// 전역 스코프에서 isLiked 변수를 선언
+let isLiked = false;
+
+// 모든 likeLike 클래스를 가진 요소를 선택
+let likeLikes = document.querySelectorAll(".likeLike");
+
+// 각 likeLike 요소에 대해 이벤트를 추가
+likeLikes.forEach(function (likeLike) {
+  likeLike.addEventListener("click", function () {
+    // 상태 변경
+    isLiked = !isLiked;
+
+/*    // 아이콘 및 배경색 변경
+    updateLikeStatus(likeLike);*/
+
+
+    // 좋아요 상태에 따라 다른 동작 수행
+    if (isLiked) {
+      console.log("좋아요를 눌렀습니다.");
+    } else {
+      console.log("좋아요를 취소했습니다.");
+    }
+
+    // 현재 좋아요 수
+    let currentCountElement = document.getElementById('count_like');
+    if (currentCountElement) {
+      let currentCount = parseInt(currentCountElement.textContent, 10);
+
+      // 좋아요 수 업데이트
+      currentCountElement.textContent = isLiked ? (currentCount + 1).toString() : (currentCount - 1).toString();
+    } else {
+      console.error("count_like 요소를 찾을 수 없습니다.");
+    }
+  });
+});
+
+// 아이콘 및 배경색 변경 함수
+function updateLikeStatus(likeLike) {
+  // isLiked 값에 따라 클래스 추가 또는 제거
+  likeLike.classList.toggle("active", isLiked);
+
+  // 아이콘 변경
+  let heartIcon = likeLike.querySelector("i");
+  if (heartIcon) {
+    heartIcon.className = isLiked ? "lni lni-heart-filled" : "lni lni-heart";
+  } else {
+    console.error("하트 아이콘 요소를 찾을 수 없습니다.");
+  }
+}
+
+function count_likeLike(likeCount) {
+  // 좋아요 수를 증가시키는 로직 추가
+  var updatedCount = parseInt(likeCount) + 1;
+
+  // 좋아요 수 업데이트
+  let likeCountElement = document.getElementById('count_like');
+  if (likeCountElement) {
+    likeCountElement.innerText = updatedCount;
+  } else {
+    console.error("count_like 요소를 찾을 수 없습니다.");
+  }
+}

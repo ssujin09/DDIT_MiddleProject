@@ -1,0 +1,50 @@
+package meeting.dao;
+
+import org.apache.ibatis.exceptions.PersistenceException;
+import org.apache.ibatis.session.SqlSession;
+
+import meeting.vo.MeetingVO;
+import util.MyBatisUtil;
+
+/**
+	 * Description : 모임 관련 다오 인터페이스를 임플리먼트한 클래스
+	 * Date : 2024. 1. 17
+	 * History :
+	 * - 작성자 : '선민수', 날짜 : 2024. 1. 17, 설명 : 최초작성
+	 * - 수정자 : 
+	 * @author PC-09
+	 */
+public class MeetingDaoImpl implements IMeetingDao {
+	
+	SqlSession sqlSession = MyBatisUtil.getInstance();
+	
+	private static IMeetingDao singleTon = null;
+
+	private MeetingDaoImpl() {
+	};
+
+	public static IMeetingDao getInstance() {
+		if (singleTon == null) {
+			singleTon = new MeetingDaoImpl();
+		}
+		return singleTon;
+	}
+
+	@Override
+	public int makeMeeting(MeetingVO mv) {
+		int result = 0;
+		try {
+			result = sqlSession.insert("meeting.makeMeeting",mv);
+			if(result>0) {
+				sqlSession.commit();
+			}
+		} catch (PersistenceException e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		
+		return result;
+	}
+
+}

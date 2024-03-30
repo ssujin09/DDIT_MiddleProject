@@ -1,0 +1,18 @@
+package admin.dao;
+
+import java.util.List;
+import java.util.Map;
+
+import admin.vo.CmmntyVO;
+
+public interface IReportDao {
+
+	List<CmmntyVO> getReportPostList();
+	
+	//신고게시글 상세보기
+	CmmntyVO getReportPostDetail(int cmmntyCode);
+	
+	//신고 게시글 삭제
+	int deleteReportPost(Map<String, Object> param);
+
+}

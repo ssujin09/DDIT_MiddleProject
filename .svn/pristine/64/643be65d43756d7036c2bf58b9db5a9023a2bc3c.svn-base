@@ -1,0 +1,36 @@
+package admin.service;
+
+import java.util.List;
+
+import admin.dao.IRestaurantDao;
+import admin.dao.RestaurantDaoImpl;
+import admin.vo.RestaurantVO;
+
+public class RestaurantServiceImpl implements IRestaurantService{
+
+	private static IRestaurantService restaurantService;
+	
+	private IRestaurantDao restaurantDao;
+	
+	public RestaurantServiceImpl() {
+		restaurantDao=RestaurantDaoImpl.getInstance();
+	}
+	
+	public static IRestaurantService getInstance() {
+		if(restaurantService == null) {
+			restaurantService=new RestaurantServiceImpl(); 
+		}
+		return restaurantService;
+		}
+
+	@Override
+	public List<RestaurantVO> getListRstrnt(String city) {
+		List<RestaurantVO> rstrntList = restaurantDao.getListRstrnt(city);
+		return rstrntList;
+	}
+
+	
+
+
+
+}

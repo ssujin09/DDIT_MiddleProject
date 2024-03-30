@@ -1,0 +1,20 @@
+package meeting.service;
+
+import meeting.vo.MeetingVO;
+
+/**
+	 * Description : 모임 관련 서비스 인터페이스
+	 * Date : 2024. 1. 17
+	 * History :
+	 * - 작성자 : '선민수', 날짜 : 2024. 1. 17, 설명 : 최초작성
+	 * - 수정자 : 
+	 * @author PC-09
+	 */
+public interface IMeetingService {
+
+	int makeMeeting(MeetingVO mv);
+	
+	
+	
+	
+}

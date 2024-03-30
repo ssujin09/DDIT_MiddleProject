@@ -1,0 +1,62 @@
+package restaurant.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.ibatis.exceptions.PersistenceException;
+import org.apache.ibatis.session.SqlSession;
+
+import mypage.vo.ReviewVO;
+import restaurant.dao.RestaurantDao;
+import restaurant.dao.RestaurantDaoImpl;
+import util.MyBatisUtil;
+import restaurant.vo.RestaurantVO;
+
+public class RestaurantServiceImpl implements RestaurantService {
+
+	private static RestaurantService singleTon = null;
+
+	private RestaurantServiceImpl() {
+	};
+
+	public static RestaurantService getInstance() {
+		if (singleTon == null) {
+			singleTon = new RestaurantServiceImpl();
+		}
+		return singleTon;
+	}
+
+	RestaurantDao dao = RestaurantDaoImpl.getInstance();
+	
+	
+	@Override
+	public RestaurantVO displayDeatils(int rstrntCode) {
+		
+		RestaurantVO rv = dao.displayDeatils(rstrntCode);
+		
+		return rv;
+	}
+
+	@Override
+	public RestaurantVO displayLocals(int rstrntCode) {
+		
+		RestaurantVO rv = dao.getLocal(rstrntCode);
+		
+		return rv;
+	}
+
+	@Override
+	public int insertReview(ReviewVO reviewVO) {
+		
+		
+		return dao.insertReview(reviewVO);
+	}
+
+	@Override
+	public ReviewVO getReview(ReviewVO reviewVO) {
+		return dao.getReview(reviewVO);
+	}
+
+
+	
+}

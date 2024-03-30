@@ -1,0 +1,70 @@
+package mypage.dao;
+
+import java.util.List;
+
+import community.vo.CmmntyVO;
+import community.vo.CommentVO;
+import member.vo.CustomerVO;
+import mypage.vo.FavoriteVO;
+import mypage.vo.MenuVO;
+import mypage.vo.ProfileImgVO;
+import mypage.vo.ReviewImgVO;
+import mypage.vo.ReviewVO;
+
+/**
+	 * Description : 마이페이지 DAO를 위한 인터페이스 클래스
+	 * Date : 2024. 1. 11.
+	 * History :
+	 * - 작성자 : '선민수', 날짜 : 2024. 1. 11., 설명 : 최초작성
+	 * - 수정자 : 
+	 * @author pok4k
+	 */
+public interface IMypageDao {
+
+	int cstmrProfileSetting(CustomerVO cv);
+
+	int cstmrProfileImgInsert(ProfileImgVO piv);
+
+	int cstmrProfileImgGet(ProfileImgVO img);
+
+	ProfileImgVO profileImgInfo(int profileImgNo);
+
+	List<CmmntyVO> getMyCommunity(String cstmrId);
+
+	int postDelete(int cmmntyCode);
+
+	List<ReviewVO> getMyReview(String cstmrId);
+
+	int reviewDelete(int reviewNo);
+
+	String getAddr(int rstrntCode);
+
+	String getName(int rstrntCode);
+
+	int countPost(String cstmrId);
+
+	List<CommentVO> getCommentList(String cstmrId);
+
+	String getTitle(int cmmntyCode);
+
+	int deleteCcomment(int ccommentCode);
+
+	List<FavoriteVO> favoriteRst(String cstmrId);
+
+	String getCategory(int rstrntCode);
+
+	MenuVO getMenu(int rstrntCode);
+
+	int insertReviewImg(ReviewImgVO img);
+
+	int postModify(CmmntyVO cv);
+
+	String getNick(String cstmrId);
+
+	int withdrwal(String cstmrId);
+
+	int countFavorite(String cstmrId);
+
+	List<CmmntyVO> getRecentList(String cstmrId);
+
+}

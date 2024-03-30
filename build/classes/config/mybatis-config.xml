@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	
+	<properties resource="db.properties" />
+	
+	<settings>
+		<!-- Camel Case, Snake Case로만 다를 경우 
+        	resultMap을 안 써도 이 코드 쓰면 알아서 바꿔줌 -->
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	
+	<typeAliases>
+		<typeAlias type="member.vo.CustomerVO" alias="CustomerVO"/>
+		<typeAlias type="community.vo.CmmntyVO" alias="CmmntyVO"/>
+		<typeAlias type="admin.vo.NoticeVO" alias="NoticeVo"/>
+		<typeAlias type="admin.vo.AdminVO" alias="AdminVo"/>
+		<typeAlias type="mypage.vo.ProfileImgVO" alias="ProfileImgVO"/>
+		<typeAlias type="mypage.vo.ReviewVO" alias="ReviewVO"/>
+		<typeAlias type="mypage.vo.FavoriteVO" alias="FavoriteVO"/>
+		<typeAlias type="restaurant.vo.MenuVO" alias="MenuVO"/>
+		<typeAlias type="restaurant.vo.RestaurantVO" alias="RestaurantVO"/>
+		<typeAlias type="restaurant.vo.BusinessVO" alias="BusinessVO"/>
+		<typeAlias type="mypage.vo.ReviewImgVO" alias="ReviewImgVO"/>
+		<typeAlias type="community.vo.CommentVO" alias="CommentVO"/>
+		<typeAlias type="meeting.vo.MeetingVO" alias="MeetingVO"/>
+		<typeAlias type="meeting.vo.MeetingDetailVO" alias="MeetingDetailVO"/>
+		<typeAlias type="home.vo.CategoryVO" alias="CategoryVO"/>
+
+	</typeAliases>
+	
+	
+	<environments default="dev">
+	
+		<environment id="dev">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}"/>
+				<property name="url" value="${url}"/>
+				<property name="username" value="${username}"/>
+				<property name="password" value="${password}"/>
+				<property name="poolMaximumActiveConnections" value="2"/> <!-- 활성화된 최대 커넥션수 -->
+				<property name="poolMaximumIdleConnections" value="2"/> <!-- 유휴상태에서 최대 커넥션수 -->
+			</dataSource>
+		</environment>
+	
+	</environments>
+	
+	<mappers>
+		<mapper resource="mappers/Customer.xml"/>	
+		<mapper resource="mappers/notice.xml"/>
+		<mapper resource="mappers/Mypage.xml"/>	
+		<mapper resource="mappers/admin.xml"/>	
+		<mapper resource="mappers/community.xml"/>
+		<mapper resource="mappers/commComment.xml"/>
+		<mapper resource="mappers/restaurant.xml"/>
+		<mapper resource="mappers/review.xml"/>
+		<mapper resource="mappers/meeting.xml"/>
+		<mapper resource="mappers/home.xml"/>
+		
+
+	
+	</mappers>
+
+</configuration>

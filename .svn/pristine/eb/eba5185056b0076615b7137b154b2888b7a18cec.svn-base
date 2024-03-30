@@ -1,0 +1,64 @@
+package admin.service;
+
+import java.util.List;
+
+import restaurant.vo.BusinessVO;
+import restaurant.vo.MenuVO;
+import restaurant.vo.RestaurantVO;
+
+
+public interface IRestaurantService{
+
+	/**
+	 * 가게 목록을 불러오는 메소드
+	 * @param city 
+	 * @return
+	 */
+	List<RestaurantVO> getListRstrnt(String city);
+	
+	/**
+	 * 가게 검색기능
+	 * @param city
+	 * @param sel
+	 * @param searchWord
+	 * @return
+	 */
+	List<RestaurantVO> getListRstrnt(String city, String sel, String searchWord);
+
+//	int addRestaurant(RestaurantVO rv, BusinessVO bv);
+	
+	/*
+	 * 가게 상세 정보
+	 */
+	RestaurantVO getRstrntDetail(int rstrntCode);
+
+	/**
+	 * 가게 상세 영업시간
+	 * @param rstrntCode
+	 * @return
+	 */
+	BusinessVO getBusinessDetail(int rstrntCode);
+
+	/**
+	 * 가게 메뉴 상세
+	 * @param rstrntCode
+	 * @return
+	 */
+	List<MenuVO> getMenuDetail(int rstrntCode);
+	
+	/**
+	 * 가게등록
+	 * @param rv
+	 * @return
+	 */
+	int insertRestaurant(RestaurantVO rv);
+	
+	int insertBusiness(BusinessVO bv);
+	
+
+	int updateRestaurant(RestaurantVO rv);
+
+	int updateBusiness(BusinessVO bv);
+
+	
+}

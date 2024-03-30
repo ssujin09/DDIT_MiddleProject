@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="customer">
+
+	<select id="loginChk" parameterType="map" resultType="member.vo.CustomerVO">
+	
+		select cstmr_id as cstmrId, cstmr_pw as cstmrPw, cstmr_nick as cstmrNick, cstmr_addr as cstmrAddr,
+		cstmr_name as cstmrName, cstmr_email as cstmrEmail, to_char(cstmr_bir) as cstmrBir, cstmr_gender as cstmrGender, cstmr_phone as cstmrPhone,
+		cstmr_warn as cstmrWarn, profile_img_no as profileImgNo
+		from customer
+		where cstmr_id = #{userId} and cstmr_pw = #{userPw} 
+		
+	</select>
+	
+	<select id="getSocialInfo" parameterType="String" resultType="member.vo.CustomerVO">
+	
+		select cstmr_id as cstmrId, cstmr_pw as cstmrPw, cstmr_nick as cstmrNick, cstmr_addr as cstmrAddr,
+		cstmr_name as cstmrName, cstmr_email as cstmrEmail, to_char(cstmr_bir) as cstmrBir, cstmr_gender as cstmrGender, cstmr_phone as cstmrPhone,
+		cstmr_warn as cstmrWarn, profile_img_no as profileImgNo
+		from customer
+		where cstmr_id = #{cstmrId}
+		
+	</select>
+	
+	<select id="socialChk" parameterType="String" resultType="String">
+		
+		select cstmr_id from customer 
+		where cstmr_phone = #{cstmrPhone}
+	
+	</select>
+	
+	<select id="getCustomer" parameterType="String" resultType="String">
+		
+		select cstmr_id from customer 
+		where cstmr_id = #{cstmrId}
+	
+	</select>
+	
+	<insert id="cstmrJoin" parameterType="member.vo.CustomerVO">
+		
+		insert into customer(cstmr_id, cstmr_pw, cstmr_name, cstmr_nick, cstmr_email, cstmr_gender, cstmr_phone, cstmr_bir, cstmr_addr, profile_img_no)
+		values(#{cstmrId}, #{cstmrPw}, #{cstmrName}, #{cstmrNick}, #{cstmrEmail}, #{cstmrGender}, #{cstmrPhone}, #{cstmrBir}, #{cstmrAddr}, #{profileImgNo})
+		
+		
+	</insert>
+	
+	<insert id="socialJoin" parameterType="member.vo.CustomerVO">
+		
+		insert into customer(cstmr_id, cstmr_name, cstmr_email, cstmr_gender, cstmr_phone)
+		values(#{cstmrId}, #{cstmrName}, #{cstmrEmail}, #{cstmrGender}, #{cstmrPhone})
+	
+	</insert>
+	
+	<insert id="insertSocial">
+	
+		insert into sociallogin(social_no, social_ctg, cstmr_id)
+		values(social_seq.nextval ,#{socialCtg} ,#{cstmrId})
+		
+	</insert>
+	
+	<select id="passChk" parameterType="String">
+	
+		select cstmr_id from customer
+		where cstmr_id = #{cstmrId} and cstmr_phone = #{cstmrPhone}
+	
+	</select>
+	
+<!-- 	<insert id="socialSignUp">
+	
+		insert into sociallogin 
+		(social_no, social_ctg, social_token, cstmr_id)
+		values ((select count(*) from sociallogin) + 1, #{socialCtg}, #{token}, #{userId})
+		
+	</insert> -->
+
+
+</mapper>

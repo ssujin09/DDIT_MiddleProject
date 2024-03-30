@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="meeting">
+
+	<insert id="makeMeeting" parameterType="MeetingVO">
+		insert into meeting(MEETING_NO, MEETING_REGION, MEETING_NMPR, 
+					MEETING_TIME,MEETING_COMMENT, MEETING_DATE, 
+					CSTMR_ID, RSTRNT_CODE) 
+				values(MEETING_SEQ.nextval, #{meetingRegion},#{meetingNmpr},#{meetingTime},#{meetingComment}
+						,#{meetingDate},#{cstmrId},#{rstrntCode})
+	</insert>
+	
+	<insert id="insertMeetingDetail" parameterType="MeetingVO">
+		insert into MEETINGDETAIL(meetingdetail_no, meeting_no, cstmr_id)
+					values(meeting_detail_seq.nextval, 
+						(select meeting_no from meeting 
+						where meeting_date = #{meetingDate} 
+						and meeting_region = #{meetingRegion}
+						and cstmr_id = #{cstmrId}
+						and rstrnt_code = #{rstrntCode}),
+						#{cstmrId})
+	</insert>
+	
+	<select id="getMeetingCount" resultType="int">
+		select count(*) from MeetingDetail where meeting_no = #{meetingNo}
+	</select>
+	
+	
+	<select id="getMeetingList" resultType="MeetingVO" parameterType="int">
+		select * from meeting where rstrnt_code = #{rstrntCode}
+	</select>
+	
+	<insert id="joinMeeting" parameterType="MeetingDetailVO">
+		insert into MEETINGDETAIL(MEETINGDETAIL_NO, meeting_no, cstmr_id)
+					values(meeting_detail_seq.nextval, #{meetingNo}, #{cstmrId})
+	</insert>	
+</mapper>

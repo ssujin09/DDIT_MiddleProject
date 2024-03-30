@@ -1,0 +1,730 @@
+
+<%@page import="restaurant.vo.MenuVO"%>
+<%@page import="restaurant.vo.BusinessVO"%>
+<%@page import="restaurant.vo.RestaurantVO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="admin.service.Paging"%>
+<%@page import="admin.vo.NoticeVO"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+
+<%
+	
+%>
+
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<title>Blog Grid Sidebar - ClassiGrids Classified Ads and
+	Listing Website Template.</title>
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="shortcut icon" type="image/x-icon"
+	href="assets/images/favicon.svg" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- Web Font -->
+
+<link
+	href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
+	rel="stylesheet">
+
+<!-- ========================= CSS here ========================= -->
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/LineIcons.2.0.css" />
+
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/animate.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/tiny-slider.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/glightbox.min.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/main.css" />
+
+
+<!-- 폰트어썸 CDN -->
+<script src="https://kit.fontawesome.com/1cc7793b32.js"
+	crossorigin="anonymous"></script>
+
+<!-- jQuery CDN -->
+<script
+	src="<%=request.getContextPath()%>/assets/js/jquery-3.7.1.min.js"></script>
+
+<style>
+ input[type="text"] {
+        border: none;
+        border-bottom: 1px solid #ddd; /* 밑줄 스타일 및 색상 지정 */
+        outline: none; /* 포커스시 테두리 제거 */
+        padding: 5px; /* 인풋박스 패딩 조정 */
+    }
+
+    /* 주소 입력 인풋박스에 밑줄 스타일 추가 */
+    #addr1 {
+        border-bottom: 1px solid #ddd; /* 메인 색상과 일치하도록 지정 */
+    }
+
+    /* 메뉴 이름과 가격 입력 인풋박스에 밑줄 스타일 추가 */
+    .menu_iist_box input[type="text"] {
+        border-bottom: 1px solid #ddd; /* 메인 색상과 일치하도록 지정 */
+    }
+    /* 간격 조절을 위한 스타일 추가 */
+    .list-info li {
+        margin-bottom: 10px; /* 간격 조절을 위한 마진 추가 */
+    }
+
+    /* 주소검색 버튼에도 마진 추가 */
+    .address-btn {
+        margin-left: 10px;
+    }
+
+.address-btn {
+    background-color: #5830E0; /* 메인 색상과 일치하도록 지정 */
+    color: #fff; /* 흰색 텍스트 색상 */
+    border: none;
+    padding: 3px 3px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* 마우스 호버 효과 */
+}
+
+.address-btn:hover {
+    background-color: #4d25a1; /* 마우스 호버 시 배경색 변경 */
+}
+.table-responsive {
+	position: relative;
+}
+
+.noticeInsert {
+	display: inline-block;
+	font-size: 15px;
+	font-weight: 500;
+	padding: 10px 20px;
+	background-color: #5830E0;
+	color: #fff;
+	border: none;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+	border-radius: 4px;
+	width: 70px;
+	height: 40px;
+	position: absolute;
+	right: 20px;
+	top: 0px; /* 테이블 오른쪽 위에 위치시킬 수 있는 값으로 조정해주세요 */
+}
+/* 페이지디자인 */
+.pagination-container {
+	display: flex;
+	justify-content: center; /* 컨텐츠를 수평으로 정렬 */
+	margin-top: 20px; /* 간격 조정 */
+}
+
+.pagination-list li a {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 30px; /* 아이콘 크기에 맞게 조정하세요 */
+	height: 30px; /* 아이콘 크기에 맞게 조정하세요 */
+}
+
+.pagination-list li a i {
+	text-align: center;
+}
+
+#addMenuBtn, .deleteMenuBtn {
+	display: inline-block;
+	font-size: 20px;
+	background-color: #5830E0;
+	color: #fff;
+	border: none;
+	padding: 5px 5px;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-left: 10px;
+}
+
+#addMenuBtn:hover, .deleteMenuBtn:hover {
+	background-color: #4d25a1;
+}
+}
+
+/* 카테고리 스타일 */
+   .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        min-width: 200px; /* 조절 가능한 최소 너비 */
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .dropdown-content a {
+        color: #333;
+        padding: 12px 10px;
+        text-decoration: none;
+        display: block;
+        transition: background-color 0.3s;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown button {
+        background-color: #3498db;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+</head>
+
+<body>
+	<!--[if lte IE 9]>
+	      <p class="browserupgrade">
+	        You are using an <strong>outdated</strong> browser. Please
+	        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
+	        your experience and security.
+	      </p>
+	    <![endif]-->
+
+	<!-- Preloader -->
+	<div class="preloader">
+		<div class="preloader-inner">
+			<div class="preloader-icon">
+				<span></span> <span></span>
+			</div>
+		</div>
+	</div>
+	<!-- /End Preloader -->
+
+
+
+	<!-- Start Breadcrumbs -->
+
+
+	<!-- Start Breadcrumbs -->
+
+	<style>
+/* 헤더디자인 */
+.header.navbar-area {
+	background-color: #fff; /* 배경색 */
+	color: #333; /* 글자색 */
+	/* 다른 스타일 속성들을 필요에 따라 추가할 수 있어요 */
+}
+</style>
+
+	<!-- Start Breadcrumbs -->
+	<div class="breadcrumbs">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg-6 col-md-6 col-12">
+					<div class="breadcrumbs-content">
+						<h1 class="page-title">관리자게시판</h1>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-6 col-12">
+					<ul class="breadcrumb-nav">
+						<li><a href="index.html">관리자</a></li>
+						<li>공지사항</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Breadcrumbs -->
+	<!-- End Breadcrumbs -->
+	<!-- End Breadcrumbs -->
+
+	<!-- Start Blog Singel Area -->
+	<!-- 	사이드바 start -->
+
+	<style>
+/* 사이드바디자인 */
+.dashboard-sidebar {
+	float: left;
+	width: 250px; /* Adjust the width as needed */
+	padding-right: 30px; /* Add some padding for spacing */
+}
+
+/* Style for the main content */
+.blog-list {
+	margin-left: 280px; /* Set margin to accommodate the sidebar */
+}
+
+/* Responsive style to handle smaller screens */
+@media ( max-width : 768px) {
+	.dashboard-sidebar {
+		float: none;
+		width: auto;
+		padding-right: 0;
+	}
+	.blog-list {
+		margin-left: 0;
+	}
+}
+</style>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('.has-submenu > a').click(function(e) {
+				e.preventDefault();
+
+				// 토글 동작
+				$(this).toggleClass('active');
+				$(this).next('.submenu').slideToggle();
+			});
+		});
+	</script>
+
+	<div class="dashboard-sidebar">
+		<div class="user-image">
+			<img src="https://via.placeholder.com/300x300" alt="#">
+			<h3>
+				관리자 <span><a href="javascript:void(0)"></a></span>
+			</h3>
+		</div>
+		<div class="dashboard-menu">
+			<ul>
+				<li id="noticeMenu"><a href="noticeList.do"><i
+						class="lni lni-pencil-alt"></i> 공지사항</a></li>
+				<li id="storeMenu" class="has-submenu"><a><i
+						class="lni lni-restaurant"></i> 매장관리</a>
+					<ul class="submenu" style="display: none;">
+						<li><a href="../admin/restaurantList.do?city=서울">서울</a></li>
+						<li><a href="../admin/restaurantList.do?city=경기">경기</a></li>
+						<li><a href="../admin/restaurantList.do?city=인천">인천</a></li>
+						<li><a href="../admin/restaurantList.do?city=대전">대전</a></li>
+						<li><a href="../admin/restaurantList.do?city=충청">충청</a></li>
+						<li><a href="../admin/restaurantList.do?city=강원">강원</a></li>
+						<li><a href="../admin/restaurantList.do?city=전라">전라</a></li>
+						<li><a href="../admin/restaurantList.do?city=경상">경상</a></li>
+						<li><a href="../admin/restaurantList.do?city=대구">대구</a></li>
+						<li><a href="../admin/restaurantList.do?city=부산">부산</a></li>
+						<li><a href="../admin/restaurantList.do?city=제주">제주</a></li>
+						<!-- 기타 서브메뉴 항목들을 여기에 추가 -->
+					</ul></li>
+				<li id="customerMenu"><a href="customerList.do"><i
+						class="lni lni-users"></i> 회원관리</a></li>
+				<li id="reportMenu"><a href="reportPostList.do"><i
+						class="lni lni-bolt-alt"></i> 신고관리</a></li>
+
+			</ul>
+			<div class="button">
+				<a class="btn" href="javascript:void(0)">로그아웃</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- 사이드바 끝 -->
+
+
+
+	<section class="section latest-news-area blog-list">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-md-7 col-12"></div>
+				<!-- 24-01-11/////////////////////////////////////////////////////////////////////// -->
+				<div class="item-details-blocks">
+					<div class="row">
+						<div class="section-title">
+							<h2>신규가게등록</h2>
+						</div>
+						<form class="rstrnt-update-form" method="post"
+							enctype="multipart/form-data"
+							action="<%=request.getContextPath()%>/admin/insertrstrnt.do">
+							<div class="col-lg-8 col-md-7 col-12" style="margin: 0 auto">
+								<div class="single-block description time_OL">
+									<div class="product-info">
+										<h2>
+											가게이름:<input type="text" name="rstrntName">
+										</h2>
+										<div class="list-info">
+											<li><span><i class="lni lni-map-marker"
+													aria-hidden="true"></i></span>주소<input type="text" id="addr1"
+												name="rstrntAddr">
+													<button type="button" id="addrBtn"
+														class="btn btn-info btn-sm address-btn">주소검색</button>
+											</li>
+											<li><span><i class="fa fa-phone"
+													aria-hidden="true"></i></span>전화번호<input type="text"
+												name="rstrntTel"></li>
+											<li><span><i class="fa fa-tag" aria-hidden="true"></i></span>태그<input
+												type="text" name="rstrntTag"></li>
+											<li><span><i class="fa fa-tag" aria-hidden="true"></i></span>카테고리<input
+												type="text" id ="selectedCategory" name="rstrntCtgry"></li>
+												<!-- 카테고리 드롭다운 추가 -->
+<div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" id="categoryDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        카테고리 선택
+    </button>
+    <div class="dropdown-content" id="categoryList">
+        <a href="#" data-category="칼국수">칼국수</a>
+        <a href="#" data-category="카페">카페</a>
+        <a href="#" data-category="분위기좋은">분위기좋은</a>
+        <a href="#" data-category="돈까스">돈까스</a>
+        <a href="#" data-category="스시">스시</a>
+        <a href="#" data-category="삼겹살">삼겹살</a>
+        <a href="#" data-category="삼겹살">삼겹살</a>
+        <a href="#" data-category="중화요리">중화요리</a>
+        <a href="#" data-category="백반">백반</a>
+        <a href="#" data-category="데이트">데이트</a>
+    </div>
+</div>
+<!-- 카테고리 드롭다운 끝 -->
+
+						
+
+										</div>
+									</div>
+								</div>
+								<!-- Start Single Block -->
+								<div class="single-block description time_OL">
+									<div class="OLState">
+										<h3 class="time">영업시간</h3>
+
+										<i class="fa fa-clock-o" aria-hidden="true"></i>
+									</div>
+									<ul class="details-list">
+
+										<li class="time">오픈시간 : <input type="text"
+											name="rstrntOpen">
+										</li>
+										<li class="time">마감시간 : <input type="text"
+											name="rstrntclose">
+										</li>
+										<li class="time additional-info">휴게시간 : <input
+											type="text" name="rstrntSt"> ~ <input type="text"
+											name="rstrntEnd">
+										</li>
+									</ul>
+								</div>
+
+
+								<!-- 2021-01-14 여기부터1!!!!!/////////////////////////////////////////////////////////////////////// -->
+								<!-- Start Single Block -->
+								<div class="single-block menu_box">
+									<div class="menu_info">
+										<h3>메뉴정보</h3>
+										<div class="menu_list">
+											<table id="menuTable">
+												<%-- 											<% int displayMenuCount=10; for (int i=0; i < Math.min(menuList.size(), displayMenuCount); i++) { MenuVO mv=menuList.get(i); %> --%>
+
+												<tr class="menu_iist_box">
+													<td class="menu_food"><input type="text"
+														name="menuName1" placeholder="메뉴 이름"></td>
+
+													<td class="menu_price"><input type="text"
+														name="menuPrice1" placeholder="메뉴 가격"></td>
+												</tr>
+											</table>
+											<!-- 메뉴 추가 버튼 -->
+											<button type="button" id="addMenuBtn">+</button>
+										</div>
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="form-group button mb-0">
+										<button type="submit" class="btn">등록</button>
+										<button type="button" class="btn-cancel">
+											<a href="./restaurantList.do?city=">취소</a>
+										</button>
+									</div>
+								</div>
+
+								<!-- End Single Block -->
+								<!-- Start Single Block -->
+
+								<!-- End Single Block -->
+							</div>
+						</form>
+
+
+					</div>
+					<!-- End Single Block -->
+					<!-- 			</div> -->
+				</div>
+
+
+
+			</div>
+		</div>
+	</section>
+	<!-- Pagination 끝-->
+
+	<script
+		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+	<script>
+		//주소검색 api이용
+		$('#addrBtn')
+				.on(
+						'click',
+						function() {
+
+							//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+							new daum.Postcode(
+									{
+										oncomplete : function(data) {
+											// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+											// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+											// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+											var roadAddr = data.roadAddress; // 도로명 주소 변수
+											var extraRoadAddr = ''; // 참고 항목 변수
+
+											// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+											// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+											if (data.bname !== ''
+													&& /[동|로|가]$/g
+															.test(data.bname)) {
+												extraRoadAddr += data.bname;
+											}
+											// 건물명이 있고, 공동주택일 경우 추가한다.
+											if (data.buildingName !== ''
+													&& data.apartment === 'Y') {
+												extraRoadAddr += (extraRoadAddr !== '' ? ', '
+														+ data.buildingName
+														: data.buildingName);
+											}
+											// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+											if (extraRoadAddr !== '') {
+												extraRoadAddr = ' ('
+														+ extraRoadAddr + ')';
+											}
+
+											// 우편번호와 주소 정보를 해당 필드에 넣는다.
+											document.getElementById("addr1").value = roadAddr;
+											//	                 document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+
+										}
+									}).open();
+
+						});
+
+		//메뉴추가		
+		document
+				.addEventListener(
+						"DOMContentLoaded",
+						function() {
+							let menuCounter = 1;
+
+							document.getElementById("addMenuBtn")
+									.addEventListener("click", function() {
+										menuCounter++;
+										addMenuRow(menuCounter);
+									});
+
+							function addMenuRow(counter) {
+								const menuNameInput = document
+										.createElement("input");
+								menuNameInput.type = "text";
+								menuNameInput.name = "menuName" + counter;
+								menuNameInput.placeholder = "메뉴 이름";
+
+								const menuPriceInput = document
+										.createElement("input");
+								menuPriceInput.type = "text";
+								menuPriceInput.name = "menuPrice" + counter;
+								menuPriceInput.placeholder = "메뉴 가격";
+
+								const deleteBtn = document
+										.createElement("button");
+								deleteBtn.type = "button";
+								deleteBtn.className = "deleteMenuBtn";
+								deleteBtn.innerText = "-";
+								deleteBtn.addEventListener("click", function() {
+									deleteMenuRow(deleteBtn);
+								});
+
+								const newRow = document.createElement("tr");
+								newRow.className = "menu_iist_box";
+								newRow.innerHTML = `<td class="menu_food"></td><td class="menu_price"></td><td class="menu_delete"></td>`;
+
+								newRow.querySelector(".menu_food").appendChild(
+										menuNameInput);
+								newRow.querySelector(".menu_price")
+										.appendChild(menuPriceInput);
+								newRow.querySelector(".menu_delete")
+										.appendChild(deleteBtn);
+
+								document.getElementById("menuTable")
+										.appendChild(newRow);
+							}
+
+							function deleteMenuRow(deleteBtn) {
+								const rowToDelete = deleteBtn
+										.closest(".menu_iist_box");
+								if (rowToDelete) {
+									rowToDelete.remove();
+								}
+							}
+
+						});
+		
+	    $(document).ready(function () {
+	        // 카테고리를 선택하면 해당 값을 받아와서 고정시키는 이벤트
+	        $('#categoryList a').click(function (e) {
+	            e.preventDefault();
+	            var selectedCategory = $(this).data('category');
+	            
+	            // 해당 카테고리 값을 인풋박스에 설정
+	            $('#selectedCategory').val(selectedCategory);
+	        });
+	    });
+	</script>
+
+	<!-- Start Footer Area -->
+	<footer class="footer">
+		<!-- Start Footer Top -->
+		<div class="footer-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 col-md-6 col-12">
+						<!-- Single Widget -->
+						<div class="single-footer mobile-app">
+							<h3>Mobile Apps</h3>
+							<div class="app-button">
+								<a href="javascript:void(0)" class="btn"> <i
+									class="lni lni-play-store"></i> <span class="text">+ <span
+										class="small-text">Get It On</span> Google Play
+								</span>
+								</a> <a href="javascript:void(0)" class="btn"> <i
+									class="lni lni-apple"></i> <span class="text"> <span
+										class="small-text">Get It On</span> App Store
+								</span>
+								</a>
+							</div>
+						</div>
+						<!-- End Single Widget -->
+					</div>
+					<div class="col-lg-3 col-md-6 col-12">
+						<!-- Single Widget -->
+						<div class="single-footer f-link">
+							<h3>Locations</h3>
+							<div class="row">
+								<div class="col-lg-6 col-md-6 col-12">
+									<ul>
+										<li><a href="javascript:void(0)">Chicago</a></li>
+										<li><a href="javascript:void(0)">New York City</a></li>
+										<li><a href="javascript:void(0)">San Francisco</a></li>
+										<li><a href="javascript:void(0)">Washington</a></li>
+										<li><a href="javascript:void(0)">Boston</a></li>
+									</ul>
+								</div>
+								<div class="col-lg-6 col-md-6 col-12">
+									<ul>
+										<li><a href="javascript:void(0)">Los Angeles</a></li>
+										<li><a href="javascript:void(0)">Seattle</a></li>
+										<li><a href="javascript:void(0)">Las Vegas</a></li>
+										<li><a href="javascript:void(0)">San Diego</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<!-- End Single Widget -->
+					</div>
+					<div class="col-lg-3 col-md-6 col-12">
+						<!-- Single Widget -->
+						<div class="single-footer f-link">
+							<h3>Quick Links</h3>
+							<ul>
+								<li><a href="javascript:void(0)">About Us</a></li>
+								<li><a href="javascript:void(0)">How It's Works</a></li>
+								<li><a href="javascript:void(0)">Login</a></li>
+								<li><a href="javascript:void(0)">Signup</a></li>
+								<li><a href="javascript:void(0)">Help & Support</a></li>
+							</ul>
+						</div>
+						<!-- End Single Widget -->
+					</div>
+					<div class="col-lg-3 col-md-6 col-12">
+						<!-- Single Widget -->
+						<div class="single-footer f-contact">
+							<h3>Contact</h3>
+							<ul>
+								<li>23 New Design Str, Lorem Upsum 10<br> Hudson
+									Yards, USA
+								</li>
+								<li>Tel. +(123) 1800-567-8990 <br> Mail.
+									support@classigrids.com
+								</li>
+							</ul>
+						</div>
+						<!-- End Single Widget -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/ End Footer Middle -->
+		<!-- Start Footer Bottom -->
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="inner">
+					<div class="row">
+						<div class="col-12">
+							<div class="content">
+								<ul class="footer-bottom-links">
+									<li><a href="javascript:void(0)">Terms of use</a></li>
+									<li><a href="javascript:void(0)"> Privacy Policy</a></li>
+									<li><a href="javascript:void(0)">Advanced Search</a></li>
+									<li><a href="javascript:void(0)">Site Map</a></li>
+									<li><a href="javascript:void(0)">Information</a></li>
+								</ul>
+								<p class="copyright-text">
+									Designed and Developed by <a href="https://graygrids.com/"
+										rel="nofollow" target="_blank">GrayGrids</a>
+								</p>
+								<ul class="footer-social">
+									<li><a href="javascript:void(0)"><i
+											class="lni lni-facebook-filled"></i></a></li>
+									<li><a href="javascript:void(0)"><i
+											class="lni lni-twitter-original"></i></a></li>
+									<li><a href="javascript:void(0)"><i
+											class="lni lni-youtube"></i></a></li>
+									<li><a href="javascript:void(0)"><i
+											class="lni lni-linkedin-original"></i></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Footer Middle -->
+	</footer>
+	<!--/ End Footer Area -->
+
+	<!-- ========================= scroll-top ========================= -->
+	<a href="#" class="scroll-top btn-hover"> <i
+		class="lni lni-chevron-up"></i>
+	</a>
+
+	<!-- ========================= JS here ========================= -->
+	<script src="<%=request.getContextPath()%>/assets/js/bootstrap.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/wow.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/tiny-slider.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/glightbox.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
+</body>
+
+</html>

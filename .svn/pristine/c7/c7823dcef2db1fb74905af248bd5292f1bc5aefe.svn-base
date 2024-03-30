@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="review">
+
+	
+	<select id="getReview" resultType="ReviewVO" parameterType="ReviewVO">
+		select review_no, review_content, review_score, cstmr_id, review_taste
+				,review_service, review_price, rstrnt_code from review
+				where cstmr_id = #{cstmrId} and rstrnt_code = #{rstrntCode}
+				
+	</select>
+
+	<select id="getFirstReview" resultType="int" parameterType="int">
+		select Review_no from review where rstrnt_code = #{rstrntCode}
+         and rownum = 1
+	</select>
+
+</mapper>

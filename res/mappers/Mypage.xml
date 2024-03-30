@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mypage">
+
+
+
+	<update id="cstmrProfileSetting" parameterType="CustomerVO">
+		update customer
+		set
+		<trim suffixOverrides=",">
+			<if test="cstmrName !=null and cstmrName != ''">
+				cstmr_name = #{cstmrName},
+			</if>
+			<if test="cstmrPw !=null and cstmrPw != ''">
+				cstmr_pw= #{cstmrPw},
+			</if>
+			<if test="cstmrNick !=null and cstmrNick != ''">
+				cstmr_nick= #{cstmrNick},
+			</if>
+			<if test="cstmrEmail !=null and cstmrEmail != ''">
+				cstmr_email = #{cstmrEmail},
+			</if>
+			<if test="cstmrAddr !=null and cstmrAddr != ''">
+				cstmr_addr = #{cstmrAddr},
+			</if>
+			<if test="cstmrPhone !=null and cstmrPhone != ''">
+				cstmr_phone = #{cstmrPhone},
+			</if>
+			<if test="profileImgNo != 0 ">
+				profile_img_no = #{profileImgNo},
+			</if>
+		</trim>
+		where cstmr_id = #{cstmrId}
+	</update>
+
+	<insert id="cstmrProfileImgInsert" parameterType="ProfileImgVO">
+		insert into
+		profile_img(PROFILE_IMG_NO,PROFILE_IMG_NAME, PROFILE_IMG_COURS,
+		PROFILE_IMG_EXSTN)
+		values(profile_img_seq.nextval, #{profileImgName}, #{profileImgCours}, #{profileImgExstn})
+	</insert>
+
+	<select id="cstmrProfileImgGet" parameterType="ProfileImgVO"
+		resultType="int">
+		select profile_img_no as profileImgNo from profile_img
+		where profile_img_name = #{profileImgName} and profile_img_cours =
+		#{profileImgCours} and profile_img_exstn = #{profileImgExstn}
+
+	</select>
+
+	<select id="profileImgInfo" parameterType="int"
+		resultType="ProfileImgVo">
+		select profile_img_name as profileImgName ,
+		profile_img_cours as profileImgCours,
+		profile_img_exstn as profileImgExstn
+		from
+		profile_img where profile_img_no = #{profileImgNo}
+	</select>
+
+	<select id="getMyCommunity" parameterType="String"
+		resultType="CmmntyVO">
+		select CMMNTY_CODE, CMMNTY_TITLE, CMMNTY_CONTENT,
+		CMMNTY_DATE, CMMNTY_COUNT, CMMNTY_LIKE,
+		CMMNTY_REPORT, CSTMR_ID
+		from COMMUNITY
+		where CSTMR_ID = #{cstmrId}
+	</select>
+
+	<delete id="postDelete" parameterType="int">
+		delete from COMMUNITY
+		where cmmnty_code = #{cmmntyCode}
+	</delete>
+
+	<select id="getMyReivew" resultType="ReviewVO">
+		select
+		REVIEW_NO,
+		REVIEW_DATE,
+		REVIEW_CONTENT,
+		REVIEW_LIKE,
+		REVIEW_SCORE,
+		CSTMR_ID,
+		REVIEW_REPORT,
+		REVIEW_TASTE,
+		REVIEW_SERVICE,
+		REVIEW_PRICE,
+		RSTRNT_CODE
+		from review where cstmr_id = #{cstmrId}
+		order by review_date desc
+		
+	</select>
+	
+	<delete id="reviewDelete" parameterType="int">
+		delete from REVIEW 
+			WHERE REVIEW_NO = #{reviewNo}
+	
+	</delete>
+	
+	<select id="getAddr" resultType="String" parameterType="int">
+		select rstrnt_addr from restaurant where rstrnt_code = #{rstrntCode}
+	</select>
+	
+	<select id="getName" resultType="String" parameterType="int">
+		select rstrnt_name from restaurant where rstrnt_code = #{rstrntCode}
+	</select>
+	
+	
+<!-- 	<select id="countPost" resultType = "int" parameterType="String"> -->
+<!-- 		select (select count(*) from community where cstmr_id = #{cstmrId})+(select count(*) from review where cstmr_id = #{cstmrId}) -->
+<!--             from dual; -->
+<!-- 	</select> -->
+
+
+	<select id="countPost" resultType = "int" parameterType="String">
+		select count(*) from community where cstmr_id = #{cstmrId}
+	</select>
+	<select id="countReview" resultType = "int" parameterType="String">
+		select count(*) from review where cstmr_id = #{cstmrId}
+	</select>
+	
+	<select id="getCommentList" resultType="CommentVO" parameterType="String">
+		select CCOMMENT_CODE, CCOMMENT_DATE, CCOMMENT_LIKE, CSTMR_ID, CMMNTY_CODE, 
+		CCOMMENT_REPORT, CCOMMENT_CONTENT from COMMUNITYCOMMENT 
+		where cstmr_id = #{cstmrId}
+	</select>
+	
+	<select id="getTitle" resultType="String" parameterType="int">
+		select cmmnty_title from community where cmmnty_code = #{cmmntyCode}
+	</select>
+	
+	<select id="deleteCcomment" resultType="int" parameterType="int">
+		delete from COMMUNITYCOMMENT WHERE ccomment_code = #{ccommentCode}
+	</select>
+	
+	<select id="favoriteRst" resultType="FavoriteVO" parameterType="String">
+		select favorite_no, cstmr_id, rstrnt_code from favorite where cstmr_id = #{cstmrId}
+	</select>
+	
+	<select id="getCtno" resultType="int" parameterType="int">
+		select CTGRY_CODE from Restaurant where rstrnt_code =#{rstrntCode}
+	</select>
+	
+	<select id="getCategory" resultType="String" parameterType="int">
+		select CTGRY_NAME from Category where ctgry_code = #{ctgryCode}
+	</select>
+	
+	<select id="getMenu" resultType="MenuVO" parameterType="int">
+		select Menu_Code, menu_name, menu_price, rstrnt_code from menu where rstrnt_code = #{rstrntCode} and rownum = 1
+	</select>
+	
+	<insert id="insertReviewImg" parameterType="ReviewImgVO">
+		insert into review_file(review_file_no, review_file_path, review_file_name, review_file_extsn, review_no)
+					values(file_seq.nextval, #{reviewFilePath}, #{reviewFileName},#{reviewFileExtsn}, #{reviewNo})
+	</insert>
+	
+	<update id="postModify" parameterType="CmmntyVO">
+		update Community
+		set cmmnty_title = #{cmmntyTitle}, cmmnty_content=#{cmmntyContent}
+		where cmmnty_code = #{cmmntyCode}
+	
+	</update>
+	
+	<select id="getNick" parameterType="String" resultType="String">
+		select cstmr_nick from customer where cstmr_id=#{cstmrId}
+	</select>
+	
+	
+		
+	<select id="countFavorite" resultType="int" parameterType="String">
+		select count(*) from favorite where cstmr_id = #{cstmrId}
+	</select>
+	
+	<select id="getRecentList" resultType="CmmntyVO" parameterType="String">
+		 <![CDATA[
+    select * from community where cstmr_id = #{cstmrId} and rownum <= 4
+    order by cmmnty_date desc
+  ]]>
+	</select>
+	
+	<select id="getReviewImgInfo" resultType="ReviewImgVO" parameterType="int">
+		select review_file_no, review_file_path, review_file_name, review_file_extsn,
+		review_no
+		 from review_file where review_no = #{reviewNo}
+	</select>
+	
+	<update id="withdrawl" >
+	update Customer
+	set cstmr_expel = 'E'
+	where cstmr_id = #{cstmrId}
+	</update>
+	
+	<select id="getProfileImgNo" resultType="int" parameterType="String">
+	 select profile_img_no from customer where cstmr_id = #{cstmrId}
+	</select>
+	
+	<delete id="deleteCommentAll" parameterType="int">
+		delete FROM COMMUNITYCOMMENT
+		WHERE CMMNTY_CODE = #{cmmntyCode}
+	</delete>
+	
+	<delete id="deleteReviewImg">
+		delete from review_file
+		where review_no = #{reviewNo}
+	
+	</delete>
+</mapper>

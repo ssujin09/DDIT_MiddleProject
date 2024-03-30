@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="restaurant">
+
+
+	<select id="getRestaurant" parameterType="int" resultType="RestaurantVO">
+		select 
+		rstrnt_code,
+		rstrnt_name,	 
+		rstrnt_addr,	 
+		rstrnt_tel,
+		rstrnt_score,
+		rstrnt_like,
+		rstrnt_tag,
+		ctgry_code 
+		from restaurant
+			where rstrnt_code = #{rstrntCode}
+	</select>
+
+	<select id="getLocal" parameterType="String"
+		resultType="String">
+
+		select
+		rstrnt_addr
+		from restaurant
+		where rstrnt_code = #{rstrntCode}
+
+	</select>
+	
+	<select id="getFavortie" parameterType="int" resultType="FavortieVO">
+	
+	</select>
+	
+	
+	
+	
+	
+	<insert id="insertReview" parameterType="ReviewVO">
+		insert into Review(review_no, review_taste, review_price
+						,review_service,review_score, review_content, cstmr_id, rstrnt_code)
+						values(review_seq.nextval, #{reviewTaste}, #{reviewTaste}, #{reviewPrice}
+						,#{revoewService}, #{reviewScore}, #{reviewContent}, #{cstmrId}, #{rstrntCode})
+						
+	</insert>
+
+
+
+
+</mapper>

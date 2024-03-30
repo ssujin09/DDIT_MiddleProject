@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+ <title>맛있을지도 🧑‍🍳</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../assets/images/favicon.svg" />
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- Web Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+
+    <!-- ========================= CSS here ========================= -->
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/css/LineIcons.2.0.css" />
+    <link rel="stylesheet" href="../../assets/css/animate.css" />
+    <link rel="stylesheet" href="../../assets/css/tiny-slider.css" />
+    <link rel="stylesheet" href="../../assets/css/glightbox.min.css" />
+    <link rel="stylesheet" href="../../assets/css/main.css" />
+    
+<style>
+@import
+   url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap')
+   ;
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+  font-family: 'GmarketSansMedium';
+}
+</style>
+
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+      <p class="browserupgrade">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
+        your experience and security.
+      </p>
+    <![endif]-->
+
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-icon">
+                <span></span> <span></span>
+            </div>
+        </div>
+    </div>
+    <!-- /End Preloader -->
+
+    <!-- Start Header Area -->
+    <header class="header navbar-area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <div class="nav-inner">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand" href="../../index.html"> <img
+                                    src="../../assets/images/logo/logo.svg" alt="Logo">
+                            </a>
+                            <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span> <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                <ul id="nav" class="navbar-nav ms-auto">
+                                    <li class="nav-item"><a class=" dd-menu collapsed" href="javascript:void(0)"
+                                            data-bs-toggle="collapse" data-bs-target="#submenu-1-1"
+                                            aria-controls="navbarSupportedContent" aria-expanded="false"
+                                            aria-label="Toggle navigation">Home</a>
+                                        <ul class="sub-menu collapse" id="submenu-1-1">
+                                            <li class="nav-item"><a href="../../index.html">Home
+                                                    Default</a></li>
+                                            <li class="nav-item"><a href="index2.html">Home
+                                                    Version 2</a></li>
+                                            <li class="nav-item"><a href="index3.html">Home
+                                                    Version 3</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item"><a href="category.html"
+                                            aria-label="Toggle navigation">Categories</a></li>
+                                    <li class="nav-item"><a class=" dd-menu collapsed" href="javascript:void(0)"
+                                            data-bs-toggle="collapse" data-bs-target="#submenu-1-3"
+                                            aria-controls="navbarSupportedContent" aria-expanded="false"
+                                            aria-label="Toggle navigation">Listings</a>
+                                        <ul class="sub-menu collapse" id="submenu-1-3">
+                                            <li class="nav-item"><a href="item-listing-grid.html">Ad
+                                                    Grid</a></li>
+                                            <li class="nav-item"><a href="item-listing-list.html">Ad
+                                                    Listing</a></li>
+                                            <li class="nav-item"><a href="item-details.html">Ad
+                                                    Details</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item"><a class=" active dd-menu collapsed" href="javascript:void(0)"
+                                            data-bs-toggle="collapse" data-bs-target="#submenu-1-4"
+                                            aria-controls="navbarSupportedContent" aria-expanded="false"
+                                            aria-label="Toggle navigation">Pages</a>
+                                        <ul class="sub-menu mega-menu collapse" id="submenu-1-4">
+                                            <li class="single-block">
+                                                <ul>
+                                                    <li class="mega-menu-title">Essential Pages</li>
+                                                    <li class="nav-item"><a href="about-us.html">About
+                                                            Us</a></li>
+                                                    <li class="nav-item"><a href="item-details.html">Ads
+                                                            Details</a></li>
+                                                    <li class="nav-item"><a href="post-item.html">Ads
+                                                            Post</a></li>
+                                                    <li class="nav-item"><a href="pricing.html">Pricing
+                                                            Table</a></li>
+                                                    <li class="nav-item active"><a href="registration.html">Sign Up</a>
+                                                    </li>
+                                                    <li class="nav-item"><a href="login.html">Sign In</a></li>
+                                                    <li class="nav-item"><a href="contact.html">Contact
+                                                            Us</a></li>
+                                                    <li class="nav-item"><a href="faq.html">FAQ</a></li>
+                                                    <li class="nav-item"><a href="404.html">Error Page</a></li>
+                                                    <li class="nav-item"><a href="mail-success.html">Mail
+                                                            Success</a></li>
+                                                    <li class="nav-item"><a href="coming-soon.html">Comming
+                                                            Soon</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="single-block">
+                                                <ul>
+                                                    <li class="mega-menu-title">Dashboard</li>
+                                                    <li class="nav-item"><a href="dashboard.html">Account
+                                                            Overview</a></li>
+                                                    <li class="nav-item"><a href="profile-settings.html">My
+                                                            Profile</a></li>
+                                                    <li class="nav-item"><a href="my-items.html">My
+                                                            Ads</a></li>
+                                                    <li class="nav-item"><a href="favourite-items.html">Favorite
+                                                            Ads</a></li>
+                                                    <li class="nav-item"><a href="post-item.html">Ad
+                                                            post</a></li>
+                                                    <li class="nav-item"><a href="bookmarked-items.html">Bookmarked
+                                                            Ad</a></li>
+                                                    <li class="nav-item"><a href="messages.html">Messages</a></li>
+                                                    <li class="nav-item"><a href="delete-account.html">Close
+                                                            account</a></li>
+                                                    <li class="nav-item"><a href="invoice.html">Invoice</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item"><a class=" dd-menu collapsed" href="javascript:void(0)"
+                                            data-bs-toggle="collapse" data-bs-target="#submenu-1-5"
+                                            aria-controls="navbarSupportedContent" aria-expanded="false"
+                                            aria-label="Toggle navigation">Blog</a>
+                                        <ul class="sub-menu collapse" id="submenu-1-5">
+                                            <li class="nav-item"><a href="blog-grid-sidebar.html">Blog
+                                                    Grid Sidebar</a></li>
+                                            <li class="nav-item"><a href="blog-single.html">Blog
+                                                    Single</a></li>
+                                            <li class="nav-item"><a href="blog-single-sidebar.html">Blog
+                                                    Single Sibebar</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- navbar collapse -->
+                            <div class="login-button">
+                                <ul>
+                                    <li><a href="login.html"><i class="lni lni-enter"></i>
+                                            Login</a></li>
+                                    <li><a href="registration.html"><i class="lni lni-user"></i> Register</a></li>
+                                </ul>
+                            </div>
+                            <div class="button header-button">
+                                <a href="post-item.html" class="btn">Post an Ad</a>
+                            </div>
+                        </nav>
+                        <!-- navbar -->
+                    </div>
+                </div>
+            </div>
+            <!-- row -->
+        </div>
+        <!-- container -->
+    </header>
+    <!-- End Header Area -->
+
+    <!-- Start Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="breadcrumbs-content">
+                        <h1 class="page-title">회원가입</h1>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <ul class="breadcrumb-nav">
+                        <li><a href="index.html">홈</a></li>
+                        <li>회원가입</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumbs -->
+
+    <!-- start Registration section -->
+    <section class="login registration section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-12">
+                    <div class="form-head">
+                        <h4 class="title">회원가입</h4>
+                        <form id="registForm" method="post" onsubmit="valid()">
+                            <div class="socila-login">
+                                <ul>
+                                    <li onclick="kakaoJoin()"><a href="javascript:void(0)" class="facebook"
+                                            id="kakaoJoin"><i class="lni lni-facebook-original"></i>카카오로 시작하기</a></li>
+                                    <li id="naverIdLogin_loginButton"><a href="javascript:void(0)" class="google"><i
+                                                class="lni lni-google"></i>네이버로 시작하기</a></li>
+                                </ul>
+                            </div>
+                            <div class="alt-option">
+                                <span>또는</span>
+                            </div>
+                            <div class="form-group">
+                                <label>아이디</label> <input name="cstmrId" type="text" id="idVal" required
+                                    pattern="/^[a-z]+[a-z0-9]{5,15}$/g"><input type="button" id="idChk" value="중복확인">
+                                <div id="disp"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>비밀번호</label> <input id="cstmrPw" name="cstmrPw" type="password" required
+                                    pattern="(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#\$%\^&amp;\*\(\)_\+\|]).{8,}">
+                            </div>
+                            <div class="form-group">
+                                <label>비밀번호 확인</label> <input id="passChk" type="password" required
+                                    pattern="(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#\$%\^&amp;\*\(\)_\+\|]).{8,}">
+                            </div>
+                            <div id="dispPw"></div>
+                            <div class="form-group">
+                                <label>이름</label> <input name="cstmrName" type="text" required pattern="[가-힣]{2,8}">
+                            </div>
+                            <div class="form-group">
+                                <label>생년월일</label> <input name="cstmrBir" type="date" required>
+                            </div>
+                            <div class="form-group">
+                                <label>성별</label> 남<input name="cstmrGender" type="radio" value="남">
+                                 					여<input name="cstmrGender" type="radio" value="여">
+                            </div>
+                            <div class="form-group">
+                                <label>전화번호</label> <input name="cstmrPhone" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label>이메일</label> <input name="cstmrEmail" type="email"
+                                    pattern="^[0-9a-zA-Z]+@[0-9a-zA-Z]+(\.[a-z]+){1,2}">
+                                <input type="button" id="sendMail" value="인증">
+                            </div>
+                            <div class="form-group">
+                                <label>인증번호 입력</label> <input name="no" type="text" id="no">
+                                <input type=button id="mailChk" value="확인">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="add1" class="control-label col-sm-2">주소<span class="rq"></span></label>
+                                <button type="button" id="addrBtn" class="btn btn-info btn-sm">주소검색</button>
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control" id="addr1" name="cstmrAddr" required
+                                        readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>닉네임</label> <input name="cstmrNick" id="cstmrNick" type="text" pattern="^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,8}$" required>
+                                <input type=button id="nickChk" value="중복확인">
+                                <div id="dispN"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>프로필사진</label> <input name="profileImg" type="file" onchange="fileChk(this)" enctype="multipart/form-data">
+                                </div>
+                            <div id="joinspan"></div>
+                            <div id="social" style='display : none;'></div>
+                            <div class="button">
+                                <button type="submit" class="btn">Registration</button>
+                            </div>
+                            <p class="outer-link">
+                               	 이미 계정이 있으신가요? <a href="login.html"> 로그인</a>
+                            </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Registration section -->
+
+    <!-- Start Newsletter Area -->
+    <div class="newsletter section">
+        <div class="container">
+            <div class="inner-content">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <div class="title">
+                            <i class="lni lni-alarm"></i>
+                            <h2>Newsletter</h2>
+                            <p>We don't send spam so don't worry.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <div class="form">
+                            <form action="#" method="get" target="_blank" class="newsletter-form">
+                                <input name="EMAIL" placeholder="Your email address" type="email">
+                                <div class="button">
+                                    <button class="btn">
+                                        Subscribe<span class="dir-part"></span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Newsletter Area -->
+
+<!-- Start Footer Area -->
+   <footer class="footer">
+      <div class="footer-bottom">
+         <div class="container">
+            <div class="inner">
+               <div class="row">
+                  <p class="copyright-text" style="font-size: 30px;">
+                     Designed and Developed by <a href="https://www.ddit.or.kr/"
+                        rel="nofollow" target="_blank">Team 4 &#x1F4BB;</a>
+                  </p>
+<div style="color: white;">
+    웹 사이트 제공자: Minsu, Aujin, Sujin, Jieun, Hyeonheum <br>
+    <br>
+    <div>
+        VAT 번호: IE 202310 | 사업자 등록 번호: IE 202310 | 연락처: 042-222-8201 |
+        웹사이트 | <a href="https://www.ddit.or.kr/" style="color: white;" target="_blank">https://www.ddit.or.kr/</a> | 서비스 제공업체: 대덕인재개발원 웹서비스<br>
+        <br> 맛있을지도는 통신판매 중개자로 맛집 플랫폼을 통하여 거래가 이루어지는 통신판매의 당사자가
+        아닙니다.<br> 맛집 플랫폼을 통하여 음식, 맛, 평가, 예약 서비스에 관한 의무와 책임은 해당 서비스를
+        제공하는 점주에게 있습니다.
+    </div>
+</div>
+
+                  <p class="copyright-text">
+                     © DDIT Corp <a href="https://www.ddit.or.kr/" rel="nofollow"
+                        target="_blank">Team 4 🧑</a>
+                  </p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </footer>
+   <!--/ End Footer Area -->
+
+    <!-- ========================= scroll-top ========================= -->
+    <a href="#" class="scroll-top btn-hover"> <i class="lni lni-chevron-up"></i>
+    </a>
+
+    <!-- ========================= JS here ========================= -->
+    <script src="../../assets/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/wow.min.js"></script>
+    <script src="../../assets/js/tiny-slider.js"></script>
+    <script src="../../assets/js/glightbox.min.js"></script>
+    <script src="../../assets/js/main.js"></script>
+
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+
+    <script>
+
+        let idCheck = false;
+        let mailCheck = false;
+        let passCheck = false;
+        let nickCheck = false;
+
+        $('#idChk').on('click', function name() {
+
+            let id = $('#idVal').val();
+            let pattern = /^[a-z]+[a-z0-9]{5,15}$/g;
+            if (id != null && pattern.test(id)) {
+                $.ajax({
+                    url: 'idCheck.jsp',
+                    data: {
+                        id: id
+                    },
+                    success: function (rst) {
+                        if ($('#idVal').val() == null) {
+                            $('#disp').text('');
+                        } else {
+                            if (rst.rst == "ok") {
+                            	
+                                $('#disp').text(rst.msg).css('color', 'limegreen');
+                                $('#idVal').prop('readOnly', true);
+                                $('#idChk').prop('disabled', true);
+                                idCheck = true;
+                                
+                            } else {
+                            	
+                                $('#disp').text(rst.msg).css('color', 'orangered');
+                            }
+                        }
+
+                    },
+                    error: function (xhr) {
+                        alert(xhr.status)
+                    },
+                    dataType: 'json'
+                });
+            } else {
+                alert('아이디가 형식과 일치하지 않습니다! 다시 한번 확인해 주세요');
+            }
+
+
+        });
+
+        function valid() {
+
+            event.preventDefault();
+
+            let data = new FormData($('#registForm')[0]);
+
+            $.ajax({
+                method: 'post',
+                url: '/TasteMap/regist.do',
+                data: data,
+                processData: false,
+                contentType: false,
+                success: function (rst) {
+                	
+                	let result = rst.trim();
+                	
+                	let socialCtg = document.querySelector('#social');
+                	if (mailCheck && socialCtg.value != null) { // 소셜테그 있으면 진행
+							socialJoin();
+                        	let conf = confirm("회원가입에 성공하셨습니다. 로그인 페이지로 이동하시겠습니까?");
+                        	if (conf)
+                            	location.href = "login.html";
+                        	$('#joinspan').text("가입성공").css('color', 'limegreen');
+                        	$(':input').val(""); // 가입 성공시 작성된 내용 초기화
+					} else {
+                    	if (result == "ok" && (idCheck && mailCheck && passCheck && nickCheck)) { // 회원가입 조건 추가 (idCkeck, mailCheck == 1)
+                        	let conf = confirm("회원가입에 성공하셨습니다. 로그인 페이지로 이동하시겠습니까?");
+                        	if (conf) location.href = "login.html";
+                        	$('#joinspan').text("가입성공").css('color', 'limegreen');
+                        	$(':input').val(""); // 가입 성공시 작성된 내용 초기화
+                    	} else {
+                        	$('#joinspan').text("가입실패").css('color', 'orangered');
+                    	}
+					}
+
+                },
+                error: function (xhr) {
+                    alert(xhr.status);
+                }
+            });
+
+        }
+
+        $('#passChk').keyup(function () {
+            let cstmrPass = $('#cstmrPw').val();
+            let passChk = $('#passChk').val();
+
+            if (cstmrPass == passChk) {
+                passCheck = true;
+                $('#dispPw').text("");
+            } else {
+                passCheck = false;
+                $('#dispPw').text("비밀번호가 일치하지 않습니다. 다시 한번 확인해주세요.").css('color', 'orangered');
+            }
+        });
+
+        function fileChk(file) {
+
+            if (!/\.(jpeg|jpg|png|gif|bmp)$/i.test(file.value)) {
+
+                alert('이미지 파일만 업로드 가능합니다.');
+
+                file.value = '';
+
+                file.focus();
+
+            }
+        }
+
+        $('#addrBtn').click(f_addr);
+
+        function f_addr() {
+            new daum.Postcode({
+                oncomplete: function (data) {
+                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                    // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                    var roadAddr = data.roadAddress; // 도로명 주소 변수
+                    var extraRoadAddr = ''; // 참고 항목 변수
+
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+                        extraRoadAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if (data.buildingName !== '' && data.apartment === 'Y') {
+                        extraRoadAddr += (extraRoadAddr !== '' ? ', '
+                            + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if (extraRoadAddr !== '') {
+                        extraRoadAddr = ' (' + extraRoadAddr + ')';
+                    }
+
+                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                    document.getElementById("addr1").value = roadAddr;
+                    /* document.getElementById("sample4_jibunAddress").value = data.jibunAddress; */
+
+                }
+            }).open();
+        }
+
+        let key;
+
+        $('#sendMail').click(function () { // 인증 이메일 전송
+
+            let email = $('input[name="cstmrEmail"]').val();
+        
+        	if(email != null && email != "") {
+				alert("인증번호를 발송했습니다.");
+				$.ajax({
+	                method: 'post',
+	                url: '/TasteMap/mail.do',
+	                data: {
+	                    cstmrEmail: email
+	                },
+	                success: function (rst) {
+	                    if (rst != null) {
+	                        key = rst;
+	                    } else {
+	                        alert("인증번호 발송에 실패했습니다.");
+	                    }
+	                },
+	                error: function (xhr) {
+	                    alert(xhr.status);
+	                }
+	            });
+        	} else {
+        		alert("이메일을 입력해주세요!");
+        	}
+            
+        });
+
+        $('#mailChk').click(function () { // 인증번호 일치 여부 확인
+            // 인증번호 일치여부 확인 후 입력 readonly로 변경
+            let ketVal = $('#no').val();
+
+            if (ketVal == key) {
+                alert('인증에 성공하였습니다.');
+                $('input[name="cstmrEmail"]').prop('readOnly', true);
+                $('#no').prop('readOnly', true);
+                $('#sendMail').prop('disabled', true);
+                $('#mailChk').prop('disabled', true);
+                mailCheck = true;
+            } else {
+                alert('인증에 실패하였습니다!');
+                mailCheck = false;
+            }
+
+        });
+        
+        $('#nickChk').click(function () {
+        	
+        	// 정규식 일치하는지 검사?
+        			
+        	let $cstmrNick = $('#cstmrNick').val();
+        	let nickTest = /^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{2,8}$/.test($cstmrNick);
+        	
+        	if (!nickTest) {
+				alert("형식에 맞지 않는 닉네임 입니다. 다시 입력해주세요.");
+				$('#cstmrNick').val("");
+        	} else {
+	        	$.ajax({
+	                method: 'post',
+	                url: 'nickCheck.jsp',
+	                data: {
+	                	nickName: $cstmrNick
+	                },
+	                success: function (rst) {
+	                	let result = rst.trim();
+	                	
+	                	if (result == "ok") {
+	                		$('#dispN').text('사용 가능한 닉네임 입니다.').css('color', 'limegreen');
+							nickCheck = true;
+							$('#cstmrNick').prop('readOnly', true);
+							$('#nickChk').prop('disabled', true);
+						} else {
+	                		$('#dispN').text('사용 중인 닉네임 입니다. 다시 입력해주세요.').css('color', 'orangered');
+	                		$('#cstmrNick').val("");
+							nickCheck = false;
+						}
+	                    
+	                },
+	                error: function (xhr) {
+	                    alert(xhr.status);
+	                }
+	            });
+			}
+        	
+        });
+
+        Kakao.init('5ccd00174a49121da7c06055801ba062');
+
+        function kakaoJoin() {
+            Kakao.Auth.login({
+                success: function (response) {
+                    Kakao.API.request({
+                        url: '/v2/user/me',
+                        success: function (response) {
+                            let info = response.kakao_account; // 로그인 한 사용자 정보
+                            let id = response.id; // 로그인 id
+							let data;
+                            
+                            if (id != null) {
+
+                                document.querySelector('.socila-login').style.display = 'none';
+                                document.querySelector('.alt-option').style.display = 'none';
+
+                                let gender = info.gender;
+
+                                if (gender == 'male') {
+                                    gender = '남';
+                                } else {
+                                    gender = '여';
+                                }
+
+                                let phone = info.phone_number.replace('+82 ', '0');
+
+                                let data = {
+                                    token: Kakao.Auth.getAccessToken(),
+                                    cstmrId: id,
+                                    cstmrName: info.name,
+                                    cstmrPhone: phone,
+                                    cstmrGender: gender,
+                                    birthyear: info.birthyear,
+                                    birthday: info.birthday,
+                                    email: info.email,
+                                    socialCtg: "kakao"
+                                };
+
+                                let bir = data.birthyear
+                                    + "-"
+                                    + data.birthday.slice(0, 2) + '-'
+                                    + data.birthday.slice(2, 4);
+                                
+                            $.ajax({
+                                method: 'post',
+                                url: 'socialChk.jsp',
+                                data: {
+                                	cstmrPhone: data.cstmrPhone
+                                },
+                                success: function (rst) {
+                                	
+									let result = rst.trim();
+                                	
+                                    if (result == "ok") {
+
+                                        let conf = confirm("이미 가입된 아이디가 존재합니다. 로그인 창으로 이동하시겠습니까?");
+                                        if (conf)
+                                            location.href = "/TasteMap/views/customer/login.html";
+                                        
+                                    } else {
+
+                                        let groups = document.querySelectorAll('.form-group');
+
+                                        for (let i = 0; i <= 2; i++) {
+                                            if (i == 0) {
+                                                groups[0].style.display = 'none';
+                                            } else {
+                                                groups[i].remove();
+                                            }
+                                        }
+                                        
+										
+                                        document.querySelector('input[name="cstmrId"]').value = data.cstmrId;
+                                        document.querySelector('input[name="cstmrName"]').value = data.cstmrName;
+                                        document.querySelector('input[name="cstmrBir"]').value = bir;
+                                        document.querySelector('input[name="cstmrPhone"]').value = data.cstmrPhone;
+                                        document.querySelector('input[name="cstmrEmail"]').value = data.email;
+                                        document.querySelector('#social').value = data.socialCtg;
+
+                                        let radios = document.getElementsByName("cstmrGender");
+
+                                        if (gender == '남') {
+                                            radios[0].checked = true;
+                                        } else {
+                                            radios[1].checked = true;
+                                        }
+                                        
+                                        for (let i = 0; i < radios.length; i++) {
+											radios[i].disabled = true;
+										}
+                                        
+                                        radios.readOnly = true;
+                                        
+                                        let inputs = document.querySelectorAll('input');
+
+                                        for (let i = 0; i < inputs.length; i++) {
+                                            if (inputs[i].value != "") {
+                                                inputs[i].readOnly = true;
+                                            }
+                                        }
+
+                                    }
+                                },
+                                error: function (xhr) {
+                                    alert(xhr.status);
+                                }
+                            });
+                            }
+                            
+
+                        },
+                        fail: function (error) {
+                            console.log(error)
+                        },
+                    })
+                },
+                fail: function (error) {
+                    console.log(error)
+                },
+            })
+        }
+        
+        function socialJoin() {
+			
+        	let cstmrId = document.querySelector('input[name="cstmrId"]').value;
+        	let socialCtg = document.querySelector('#social').value;
+        	
+        	 $.ajax({
+        		 method : 'post',
+                 url: 'socialJoin.jsp',
+                 data: {
+                	 cstmrId : cstmrId,
+                	 socialCtg : socialCtg
+                 },
+                 success: function (rst) {
+                	 
+                 },
+                 error: function (xhr) {
+                     alert(xhr.status)
+                 },
+             });
+        	
+        	
+		}
+
+        /* let naverLogin = new naver.LoginWithNaverId(
+                {
+                    clientId : "UHX4_b3xDvYEMiiamTbB", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
+                    callbackUrl : "http://localhost:8888/TasteMap/views/customer/registration.html",
+                    isPopup : false,
+                    callbackHandle : true
+                });
+
+        naverLogin.init();
+
+        document.querySelector('#naverIdLogin_loginButton').addEventListener('click', function() {
+
+                naverLogin.getLoginStatus(function(status) {
+
+                if (status) {
+
+                    let info = naverLogin.user;
+                	
+                    let data = $('#registForm').serialize();
+                	
+                    $.ajax({
+                        method : 'post',
+                        url : 'socialChk.jsp',
+                        data : data,
+                        success : function(rst) {
+                        	
+                            if (rst != null) {
+                        	
+                            	
+                            } else {
+                            	
+                                if (info.getId() != null) {
+
+                                    document.querySelector('.socila-login').style.display = 'none';
+                                    document.querySelector('.alt-option').style.display = 'none';
+
+                                    let data = {
+                                            token : naverLogin.accessToken.accessToken,
+                                            userId : info.getId(),
+                                            userName : info.getName(),
+                                            userPhone : info.getMobile(),
+                                            userGender : info.getGender(),
+                                            birthyear : info.getBirthyear(),
+                                            birthday : info.getBirthday(),
+                                            email : info.getEmail(),
+                                            socialCtg : "naver"
+                                        };
+                                    	
+                                    let bir = data.birthyear + "." +  data.birthday.replace("-",".");
+                                	
+                                    let groups = document
+                                            .querySelectorAll('.form-group');
+
+                                    for (let i = 0; i <= 2; i++) {
+                                        if (i == 0) {
+                                            groups[0].style.display = 'none';
+                                        } else {
+                                            groups[i].remove();
+                                        }
+                                    }
+                                	
+                                	
+                                    document.querySelector('input[name="cstmrId"]').value = data.userId;
+                                    document.querySelector('input[name="cstmrName"]').value = data.userName;
+                                    document.querySelector('input[name="cstmrBir"]').value = bir;
+                                    document.querySelector('input[name="cstmrPhone"]').value = data.userPhone;
+                                    document.querySelector('input[name="cstmrEmail"]').value = data.email;
+
+                                    let radios = document.getElementsByName("cstmrGender");
+
+                                    if (data.userGender == 'M') {
+                                        radios[0].checked = true;
+                                    } else {
+                                        radios[1].checked = true;
+                                    }
+                                    let inputs = document
+                                            .querySelectorAll('input');
+
+                                    for (let i = 0; i < inputs.length; i++) {
+                                        if (inputs[i].value != "") {
+                                            inputs[i].readOnly = true;
+                                        }
+                                    }
+
+                                }
+                            }
+                        },
+                        error : function(xhr) {
+                            alert(xhr.status);
+                        }
+                    });
+                	
+                	
+
+                } else {
+                    console.log(status);
+                }
+            });
+        }); */
+    </script>
+</body>
+
+</html>

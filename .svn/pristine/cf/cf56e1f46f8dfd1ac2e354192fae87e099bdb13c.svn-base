@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="admin">
+
+
+	<resultMap id="restaurantResultMap" type="RestaurantVO">
+		<result property="rstrntCode" column="rstrnt_code" />
+		<result property="rstrntName" column="rstrnt_name" />
+		<result property="rstrntAddr" column="rstrnt_addr" />
+		<result property="rstrntTel" column="rstrnt_tel" />
+		<result property="rstrntTag" column="rstrnt_tag" />
+		<result property="ctgryCode" column="ctgry_code" />
+		<result property="rstrntDel" column="rstrnt_del" />
+		<result property="ctgryName" column="ctgry_name" />
+	</resultMap>
+
+
+
+	<select id="listRstrntCity" parameterType="String"
+		resultMap="restaurantResultMap">
+		<!-- <![CDATA[ -->
+		<!-- select ctgry_code as ctgryCode, -->
+		<!-- rstrnt_code as rstrntCode, -->
+		<!-- rstrnt_name as rstrntName, -->
+		<!-- rstrnt_addr as rstrntAddr, -->
+		<!-- rstrnt_tel as rstrntTel -->
+		<!-- from restaurant -->
+		<!-- where rstrnt_addr like #{city} || '%' and rstrnt_del is null -->
+		<!-- ]]> -->
+       
+          <![CDATA[
+	select r.*, 
+	c.ctgry_name as ctgry_Name
+	from restaurant r
+	JOIN 
+    category c ON r.CTGRY_CODE = c.CTGRY_CODE
+	where rstrnt_addr like #{city} || '%' and rstrnt_del is null
+       ]]>
+
+
+
+	</select>
+
+	<select id="searchRstrntCity" parameterType="map"
+		resultMap="restaurantResultMap">
+
+<!-- 		select ctgry_code as ctgryCode, -->
+<!-- 		rstrnt_code as rstrntCode, -->
+<!-- 		rstrnt_name -->
+<!-- 		as rstrntName, -->
+<!-- 		rstrnt_addr as rstrntAddr, -->
+<!-- 		rstrnt_tel as rstrntTel -->
+<!-- 		from -->
+<!-- 		restaurant -->
+
+		select r.*, 
+		c.ctgry_name as ctgry_Name
+		from restaurant r
+		JOIN 
+    	category c ON r.CTGRY_CODE = c.CTGRY_CODE
+		<choose>
+			<when test="sel == 'rstrnt_addr'">
+
+				WHERE rstrnt_addr LIKE #{city} || '%' ||
+				#{searchWord} || '%' and rstrnt_del is null
+
+			</when>
+			<otherwise>
+
+				where rstrnt_name like '%' || #{searchWord} || '%' and
+				rstrnt_addr like
+				#{city} || '%' and rstrnt_del is null
+			</otherwise>
+		</choose>
+	</select>
+
+
+
+	<select id="selectCustomerList" resultType="admin.vo.CustomerVO">
+
+		SELECT
+		cstmr_id,
+		cstmr_name,
+		cstmr_email,
+		TO_CHAR(cstmr_bir, 'YYYY-MM-DD') AS cstmr_bir,
+		cstmr_gender,
+		cstmr_phone,
+		SUBSTR(cstmr_addr, 0, 2) AS cstmr_addr
+		FROM
+		customer
+		where cstmr_expel is null
+
+	</select>
+
+	<select id="warnCustomerList" resultType="admin.vo.CustomerVO">
+
+		SELECT
+		cstmr_id,
+		cstmr_name,
+		TO_CHAR(cstmr_bir, 'YYYY-MM-DD') AS cstmr_bir,
+		cstmr_gender,
+		cstmr_phone,
+		SUBSTR(cstmr_addr, 0, 2) AS cstmr_addr,
+		cstmr_warn
+		FROM customer
+		where cstmr_warn>0 and cstmr_expel is null
+
+
+	</select>
+
+	<select id="customerDetail" parameterType="String"
+		resultType="admin.vo.CustomerVO">
+
+		SELECT
+		cstmr_id,
+		cstmr_name,
+		cstmr_email,
+		cstmr_nick,
+		cstmr_warn,
+		profile_img_no,
+		cstmr_expel,
+		TO_CHAR(cstmr_bir, 'YYYY-MM-DD')
+		AS cstmr_bir,
+		cstmr_gender,
+		cstmr_phone,
+		SUBSTR(cstmr_addr, 0, 2) AS
+		cstmr_addr
+		FROM customer
+		where cstmr_id = #{code}
+
+
+
+	</select>
+
+	<update id="expelCustomer" parameterType="String">
+
+		update customer
+		set
+		cstmr_expel='Y'
+		where cstmr_id= #{code}
+
+
+
+
+	</update>
+
+	<select id="reportPostList" resultType="admin.vo.CmmntyVO">
+
+		select cmmnty_code,
+		cstmr_id, cmmnty_title, cmmnty_date, cmmnty_count
+		from community
+		where
+		cmmnty_report is not null
+
+	</select>
+
+	<select id="reportPostDetail" parameterType="int"
+		resultType="admin.vo.CmmntyVO">
+
+		select cmmnty_code, cstmr_id, cmmnty_title, cmmnty_content,
+		cmmnty_date,
+		cmmnty_count, cmmnty_like, cmmnty_report
+		from community
+		where cmmnty_code= #{cmmnty_code}
+
+
+
+
+	</select>
+
+	<delete id="deleteReportComment" parameterType="int">
+
+		delete from
+		communitycomment
+		where cmmnty_code=#{cmmntyCode}
+
+	</delete>
+
+	<delete id="deleteReportPost" parameterType="int">
+
+		delete from
+		community
+		where cmmnty_code=#{cmmntyCode}
+
+	</delete>
+
+	<update id="updateCstmrWarn" parameterType="String">
+		update customer
+		set
+		cstmr_warn=cstmr_warn+1
+		where cstmr_id=#{cstmrId}
+
+	</update>
+
+	<update id="updateCommReport" parameterType="int">
+
+		update COMMUNITY
+		set
+		CMMNTY_REPORT =null
+		where CMMNTY_CODE=#{cmmntyCode}
+
+
+
+	</update>
+
+	<update id="updateCmmntyReport" parameterType="int">
+
+		update community
+		set cmmnty_report=null
+		where cmmnty_code=#{code}
+
+
+	</update>
+
+
+	<select id="reportComList" resultType="community.vo.CommentVO">
+
+		select ccomment_code,
+		ccomment_date, ccomment_like, cstmr_id, cmmnty_code,
+		ccomment_report,ccomment_content
+		from communitycomment
+		where
+		ccomment_report='Y'
+	</select>
+
+	<select id="reportCommDetail" parameterType="int"
+		resultType="community.vo.CommentVO">
+		select ccomment_code, ccomment_date, ccomment_like,
+		cstmr_id, cmmnty_code,
+		ccomment_report,ccomment_content
+		from
+		communitycomment
+		where ccomment_code=#{code}
+	</select>
+
+	<update id="cancelComm" parameterType="int">
+		update communitycomment
+		set ccomment_report = 'N'
+		where ccomment_code=#{code}
+
+	</update>
+
+	<delete id="deleteComm">
+		delete from communitycomment
+		where ccomment_code =
+		#{code}
+	</delete>
+
+	<update id="warnCustomer">
+		update Customer
+		set cstmr_warn = cstmr_warn +1
+		where
+		cstmr_id = (select cstmr_id from communitycomment where ccomment_code
+		= #{code})
+	</update>
+
+
+	<select id="adLogin" parameterType="map"
+		resultType="admin.vo.AdminVO">
+
+		select admin_id from admin
+		where admin_id = #{userId} and
+		admin_pw = #{userPw}
+
+	</select>
+
+	<select id="getRstrntDetail" parameterType="int"
+		resultType="RestaurantVO">
+
+		select ctgry_code as ctgryCode,
+		rstrnt_code as rstrntCode,
+		rstrnt_name as rstrntName,
+		rstrnt_addr as rstrntAddr,
+		rstrnt_tel as
+		rstrntTel,
+		rstrnt_tag as rstrntTag,
+		ctgry_code as ctgryCode
+		from restaurant
+		where
+		rstrnt_code=#{rstrntCode}
+
+
+	</select>
+
+	<select id="getBusinessDetail" parameterType="int"
+		resultType="BusinessVO">
+
+		select bsn_code, bsn_opentime, bsn_closetime,
+		bsn_reststart, bsn_restfinish,rstrnt_code from business
+		where
+		rstrnt_code=#{rstrntCode}
+
+	</select>
+
+	<select id="getMenuDetail" parameterType="int"
+		resultType="MenuVO">
+
+		select menu_code,menu_name, menu_price, rstrnt_Code from
+		menu
+		where rstrnt_code=#{rstrntCode}
+
+	</select>
+
+	<insert id="insertRestaurant" parameterType="RestaurantVO">
+		insert
+		into
+		restaurant(rstrnt_code,rstrnt_name, rstrnt_addr, rstrnt_tel,
+		rstrnt_Tag, CTGRY_CODE)
+		values(RSTRNT_SEQ.nextVal,
+		#{rstrntName},#{rstrntAddr},#{rstrntTel},#{rstrntTag},#{ctgryCode})
+
+	</insert>
+
+	<insert id="insertBusiness" parameterType="BusinessVO">
+
+		insert
+		into
+		business(bsn_code, bsn_opentime, BSN_CLOSETIME, BSN_RESTSTART,
+		BSN_RESTFINISH, RSTRNT_CODE)
+		values(bsn_seq.nextVal,
+		#{bsnOpentime},#{bsnClosetime},#{bsnReststart},#{bsnRestfinish},#{rstrntCode})
+
+
+	</insert>
+
+	<insert id="insertMenu" parameterType="MenuVO">
+
+		insert
+		into menu(menu_code, menu_name, menu_price, rstrnt_code)
+		values(menu_seq.nextVal, #{menuName},#{menuPrice},#{rstrntCode})
+
+
+	</insert>
+
+
+	<update id="updateRestaurant" parameterType="RestaurantVO">
+		update restaurant
+		set
+		<trim suffixOverrides=",">
+			<if test="rstrntName !=null and rstrntName != ''">
+				rstrnt_name = #{rstrntName},
+			</if>
+			<if test="rstrntAddr !=null and rstrntAddr != ''">
+				rstrnt_addr= #{rstrntAddr},
+			</if>
+			<if test="rstrntTel !=null and rstrntTel != ''">
+				rstrnt_tel= #{rstrntTel},
+			</if>
+			<if test="rstrntTag !=null and rstrntTag != ''">
+				rstrnt_tag= #{rstrntTag},
+			</if>
+
+		</trim>
+		where rstrnt_code = #{rstrntCode}
+	</update>
+
+
+
+	<update id="updateBusiness">
+		update business
+		set
+		<trim suffixOverrides=",">
+			<if test="bsnOpentime !=null and bsnOpentime != ''">
+				BSN_OPENTIME = #{bsnOpentime},
+			</if>
+			<if test="bsnClosetime !=null and bsnClosetime != ''">
+				BSN_CLOSETIME= #{bsnClosetime},
+			</if>
+			<if test="bsnReststart !=null and bsnReststart != ''">
+				BSN_RESTSTART= #{bsnReststart},
+			</if>
+			<if test="bsnRestfinish !=null and bsnRestfinish != ''">
+				BSN_RESTFINISH= #{bsnRestfinish},
+			</if>
+
+		</trim>
+		where rstrnt_code = #{rstrntCode}
+	</update>
+
+	<select id="getRstrntCode" resultType="int">
+
+		select max(RSTRNT_CODE) from restaurant
+
+	</select>
+
+	<update id="deleteRstrnt" parameterType="int">
+
+		update restaurant
+		set rstrnt_del = 'Y'
+		where rstrnt_code=#{rstrntCode}
+
+
+
+	</update>
+	
+	<select id="getCtgtyName" parameterType="int" resultType="String">
+
+	select ctgry_name
+	from category
+	where ctgry_code=#{ctgryCode}
+	
+	
+	
+	</select>
+
+
+
+
+</mapper>

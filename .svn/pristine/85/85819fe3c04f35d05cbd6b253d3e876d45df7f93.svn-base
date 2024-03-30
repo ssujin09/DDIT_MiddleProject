@@ -1,0 +1,31 @@
+package mypage.dao;
+
+import java.util.List;
+
+import community.vo.CmmntyVO;
+import member.vo.CustomerVO;
+import mypage.vo.ProfileImgVO;
+
+/**
+	 * Description : 마이페이지 DAO를 위한 인터페이스 클래스
+	 * Date : 2024. 1. 11.
+	 * History :
+	 * - 작성자 : '선민수', 날짜 : 2024. 1. 11., 설명 : 최초작성
+	 * - 수정자 : 
+	 * @author pok4k
+	 */
+public interface IMypageDao {
+
+	int cstmrProfileSetting(CustomerVO cv);
+
+	int cstmrProfileImgInsert(ProfileImgVO piv);
+
+	int cstmrProfileImgGet(ProfileImgVO img);
+
+	ProfileImgVO profileImgInfo(int profileImgNo);
+
+	List<CmmntyVO> getMyCommunity(String cstmrId);
+
+	int postDelete(int cmmntyCode);
+
+}

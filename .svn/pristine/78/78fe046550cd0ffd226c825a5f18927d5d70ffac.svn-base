@@ -1,0 +1,31 @@
+package mypage.vo;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class ProfileImgVO {
+	
+	
+	private int profileImgNo;
+	private String profileImgName;
+	private String profileImgCours;
+	private String profileImgExstn;
+	
+	
+	public ProfileImgVO() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public ProfileImgVO(String profileImgName, String profileImgCours, String profileImgExstn) {
+		super();
+		this.profileImgName = profileImgName;
+		this.profileImgCours = profileImgCours;
+		this.profileImgExstn = profileImgExstn;
+	}
+	
+	
+	
+	
+}

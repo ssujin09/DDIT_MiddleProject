@@ -1,0 +1,24 @@
+package restaurant.vo;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class FavortieVO {
+	private int favortieNo;
+	private String cstmrId;
+	private int rstrntCode;
+	
+	public FavortieVO() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public FavortieVO(int favortieNo, String cstmrId, int rstrntCode) {
+		super();
+		this.favortieNo = favortieNo;
+		this.cstmrId = cstmrId;
+		this.rstrntCode = rstrntCode;
+	}
+	
+}

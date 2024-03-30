@@ -1,0 +1,36 @@
+package mypage.vo;
+
+import lombok.Getter;
+import lombok.Setter;
+
+/**
+	 * Description : 메뉴 VO 클래스
+	 * Date : 2024. 1. 16.
+	 * History :
+	 * - 작성자 : '선민수', 날짜 : 2024. 1. 16., 설명 : 최초작성
+	 * - 수정자 : 
+	 * @author pok4k
+	 */
+@Setter
+@Getter
+public class MenuVO {
+	private int menuCode;
+	private String menuName;
+	private String menuPrice;
+	private int rstrntCode;
+	
+	public MenuVO() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public MenuVO(int menuCode, String menuName, String menuPrice, int rstrntCode) {
+		super();
+		this.menuCode = menuCode;
+		this.menuName = menuName;
+		this.menuPrice = menuPrice;
+		this.rstrntCode = rstrntCode;
+	}
+	
+	
+	
+}

@@ -1,0 +1,10 @@
+package restaurant.dao;
+
+import restaurant.vo.FavortieVO;
+
+public interface FavortieDao {
+	
+	FavortieVO displayFavortie (int favortieNo);
+
+
+}

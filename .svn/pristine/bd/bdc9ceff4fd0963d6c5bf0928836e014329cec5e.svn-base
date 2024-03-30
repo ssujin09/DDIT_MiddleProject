@@ -1,0 +1,37 @@
+package restaurant.controller;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import restaurant.service.FavortieService;
+import restaurant.service.FavortieServiceImpl;
+import restaurant.vo.FavortieVO;
+
+
+@WebServlet("/favortie.do")
+public class Favortie extends HttpServlet {
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		int favortieNo = Integer.parseInt(req.getParameter("favortieNo"));
+		
+		FavortieService favortieService = FavortieServiceImpl.getInstance();
+	
+		FavortieVO fv = favortieService.displayFavortie(favortieNo);
+		
+		req.setAttribute("restaurant", fv);
+		req.getRequestDispatcher("/views/restaurant/restaurant.jsp").forward(req, resp);
+		
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doGet(req, resp);
+	}
+}

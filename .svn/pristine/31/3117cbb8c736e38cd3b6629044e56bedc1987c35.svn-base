@@ -1,0 +1,409 @@
+
+<%@page import="restaurant.vo.MenuVO"%>
+<%@page import="restaurant.vo.BusinessVO"%>
+<%@page import="restaurant.vo.RestaurantVO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="admin.service.Paging"%>
+<%@page import="admin.vo.NoticeVO"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+
+<%
+
+	RestaurantVO rv = (RestaurantVO)request.getAttribute("rv");
+	BusinessVO bv = (BusinessVO)request.getAttribute("bv");
+	List<MenuVO> menuList = (List<MenuVO>)request.getAttribute("menuList");
+
+%>
+
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<title>Blog Grid Sidebar - ClassiGrids Classified Ads and
+	Listing Website Template.</title>
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="shortcut icon" type="image/x-icon"
+	href="assets/images/favicon.svg" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- Web Font -->
+
+<link
+	href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
+	rel="stylesheet">
+
+<!-- ========================= CSS here ========================= -->
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/LineIcons.2.0.css" />
+
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/animate.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/tiny-slider.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/glightbox.min.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/main.css" />
+
+
+<!-- 폰트어썸 CDN -->
+<script src="https://kit.fontawesome.com/1cc7793b32.js"
+	crossorigin="anonymous"></script>
+
+<!-- jQuery CDN -->
+<script
+	src="<%=request.getContextPath()%>/assets/js/jquery-3.7.1.min.js"></script>
+
+
+<style>
+.table-responsive {
+	position: relative;
+}
+
+.noticeInsert {
+	display: inline-block;
+	font-size: 15px;
+	font-weight: 500;
+	padding: 10px 20px;
+	background-color: #5830E0;
+	color: #fff;
+	border: none;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+	border-radius: 4px;
+	width: 70px;
+	height: 40px;
+	position: absolute;
+	right: 20px;
+	top: 0px; /* 테이블 오른쪽 위에 위치시킬 수 있는 값으로 조정해주세요 */
+}
+/* 페이지디자인 */
+.pagination-container {
+	display: flex;
+	justify-content: center; /* 컨텐츠를 수평으로 정렬 */
+	margin-top: 20px; /* 간격 조정 */
+}
+
+.pagination-list li a {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 30px; /* 아이콘 크기에 맞게 조정하세요 */
+	height: 30px; /* 아이콘 크기에 맞게 조정하세요 */
+}
+
+.pagination-list li a i {
+	text-align: center;
+}
+}
+</style>
+</head>
+
+<body>
+	<!--[if lte IE 9]>
+	      <p class="browserupgrade">
+	        You are using an <strong>outdated</strong> browser. Please
+	        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
+	        your experience and security.
+	      </p>
+	    <![endif]-->
+
+	<!-- Preloader -->
+	<div class="preloader">
+		<div class="preloader-inner">
+			<div class="preloader-icon">
+				<span></span> <span></span>
+			</div>
+		</div>
+	</div>
+	<!-- /End Preloader -->
+
+
+
+	<!-- Start Breadcrumbs -->
+
+
+	<!-- Start Breadcrumbs -->
+
+	<style>
+/* 헤더디자인 */
+.header.navbar-area {
+	background-color: #fff; /* 배경색 */
+	color: #333; /* 글자색 */
+	/* 다른 스타일 속성들을 필요에 따라 추가할 수 있어요 */
+}
+</style>
+
+	<!-- Start Breadcrumbs -->
+	<div class="breadcrumbs">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg-6 col-md-6 col-12">
+					<div class="breadcrumbs-content">
+						<h1 class="page-title">관리자게시판</h1>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-6 col-12">
+					<ul class="breadcrumb-nav">
+						<li><a href="index.html">관리자</a></li>
+						<li>공지사항</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Breadcrumbs -->
+	<!-- End Breadcrumbs -->
+	<!-- End Breadcrumbs -->
+
+	<!-- Start Blog Singel Area -->
+	<!-- 	사이드바 start -->
+
+	<jsp:include page="adminAside.jsp" />
+
+
+	<section class="section latest-news-area blog-list">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-md-7 col-12"></div>
+				<!-- 24-01-11/////////////////////////////////////////////////////////////////////// -->
+				<div class="item-details-blocks">
+					<div class="row">
+						<div class="section-title">
+							<h2>가게상세정보</h2>
+						</div>
+
+						<div class="col-lg-8 col-md-7 col-12" style="margin: 0 auto">
+							<div class="single-block description time_OL">
+								<div class="product-info">
+									<h2 class="title"><%=rv.getRstrntName() %></h2>
+									<div class="list-info">
+										<h4>Informations</h4>
+										<li><span><i class="lni lni-map-marker"
+												aria-hidden="true"></i></span><%=rv.getRstrntAddr() %></li>
+
+										<li><span><i class="fa fa-phone"
+												aria-hidden="true"></i></span><%=rv.getRstrntTel() %></li>
+									</div>
+								</div>
+							</div>
+							<!-- Start Single Block -->
+								<div class="single-block description time_OL">
+									<div class="OLState">
+										<h3 class="time">영업시간</h3>
+								
+										<i class="fa fa-clock-o" aria-hidden="true"></i>
+									</div>
+									<ul class="details-list">
+					
+										<li class="time">오픈시간 : <%=bv.getBsnOpentime() %></li>
+										<li class="time">마감시간 :<%=bv.getBsnClosetime()%></li>
+										<li class="time additional-info">휴게시간 : <%=bv.getBsnReststart()%>
+																			~ <%=bv.getBsnRestfinish()%> 
+										</li>
+									</ul>
+								</div>
+
+
+							<!-- 2021-01-14 여기부터1!!!!!/////////////////////////////////////////////////////////////////////// -->
+							<!-- Start Single Block -->
+							<div class="single-block menu_box">
+								<div class="menu_info">
+									<h3>메뉴정보</h3>
+									<div class="menu_list">
+										<table>
+											<% int displayMenuCount=10; for (int i=0; i < Math.min(menuList.size(), displayMenuCount); i++) { MenuVO mv=menuList.get(i); %>
+
+
+
+
+											<tr class="menu_iist_box">
+												<td class="menu_food"><%=mv.getMenuName()%></td>
+												<td class="menu_line">
+													----------------------------------------------------------------------------------------------------------------------------------------------------
+												</td>
+												<td class="menu_price"><%=mv.getMenuPrice()%></td>
+											</tr>
+
+											<%
+												}
+											%>
+
+
+
+										</table>
+
+									</div>
+								</div>
+							</div>
+							<div class="row justify-content-end mt-4">
+								<div class="col-md-6 text-end">
+									<a href="../admin/rstrntDetail.do?rstrntCode=<%=rv.getRstrntCode()%>&param=update" class="btn btn-primary">수정</a> 
+									<a href="#"
+										class="btn btn-danger"
+										onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a>
+								</div>
+							</div>
+							<!-- End Single Block -->
+							<!-- Start Single Block -->
+
+							<!-- End Single Block -->
+
+
+						</div>
+
+					</div>
+					<!-- End Single Block -->
+					<!-- 			</div> -->
+				</div>
+
+
+
+			</div>
+		</div>
+	</section>
+	<!-- Pagination 끝-->
+
+
+	<!-- Start Footer Area -->
+	<footer class="footer">
+		<!-- Start Footer Top -->
+		<div class="footer-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 col-md-6 col-12">
+						<!-- Single Widget -->
+						<div class="single-footer mobile-app">
+							<h3>Mobile Apps</h3>
+							<div class="app-button">
+								<a href="javascript:void(0)" class="btn"> <i
+									class="lni lni-play-store"></i> <span class="text">+ <span
+										class="small-text">Get It On</span> Google Play
+								</span>
+								</a> <a href="javascript:void(0)" class="btn"> <i
+									class="lni lni-apple"></i> <span class="text"> <span
+										class="small-text">Get It On</span> App Store
+								</span>
+								</a>
+							</div>
+						</div>
+						<!-- End Single Widget -->
+					</div>
+					<div class="col-lg-3 col-md-6 col-12">
+						<!-- Single Widget -->
+						<div class="single-footer f-link">
+							<h3>Locations</h3>
+							<div class="row">
+								<div class="col-lg-6 col-md-6 col-12">
+									<ul>
+										<li><a href="javascript:void(0)">Chicago</a></li>
+										<li><a href="javascript:void(0)">New York City</a></li>
+										<li><a href="javascript:void(0)">San Francisco</a></li>
+										<li><a href="javascript:void(0)">Washington</a></li>
+										<li><a href="javascript:void(0)">Boston</a></li>
+									</ul>
+								</div>
+								<div class="col-lg-6 col-md-6 col-12">
+									<ul>
+										<li><a href="javascript:void(0)">Los Angeles</a></li>
+										<li><a href="javascript:void(0)">Seattle</a></li>
+										<li><a href="javascript:void(0)">Las Vegas</a></li>
+										<li><a href="javascript:void(0)">San Diego</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<!-- End Single Widget -->
+					</div>
+					<div class="col-lg-3 col-md-6 col-12">
+						<!-- Single Widget -->
+						<div class="single-footer f-link">
+							<h3>Quick Links</h3>
+							<ul>
+								<li><a href="javascript:void(0)">About Us</a></li>
+								<li><a href="javascript:void(0)">How It's Works</a></li>
+								<li><a href="javascript:void(0)">Login</a></li>
+								<li><a href="javascript:void(0)">Signup</a></li>
+								<li><a href="javascript:void(0)">Help & Support</a></li>
+							</ul>
+						</div>
+						<!-- End Single Widget -->
+					</div>
+					<div class="col-lg-3 col-md-6 col-12">
+						<!-- Single Widget -->
+						<div class="single-footer f-contact">
+							<h3>Contact</h3>
+							<ul>
+								<li>23 New Design Str, Lorem Upsum 10<br> Hudson
+									Yards, USA
+								</li>
+								<li>Tel. +(123) 1800-567-8990 <br> Mail.
+									support@classigrids.com
+								</li>
+							</ul>
+						</div>
+						<!-- End Single Widget -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/ End Footer Middle -->
+		<!-- Start Footer Bottom -->
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="inner">
+					<div class="row">
+						<div class="col-12">
+							<div class="content">
+								<ul class="footer-bottom-links">
+									<li><a href="javascript:void(0)">Terms of use</a></li>
+									<li><a href="javascript:void(0)"> Privacy Policy</a></li>
+									<li><a href="javascript:void(0)">Advanced Search</a></li>
+									<li><a href="javascript:void(0)">Site Map</a></li>
+									<li><a href="javascript:void(0)">Information</a></li>
+								</ul>
+								<p class="copyright-text">
+									Designed and Developed by <a href="https://graygrids.com/"
+										rel="nofollow" target="_blank">GrayGrids</a>
+								</p>
+								<ul class="footer-social">
+									<li><a href="javascript:void(0)"><i
+											class="lni lni-facebook-filled"></i></a></li>
+									<li><a href="javascript:void(0)"><i
+											class="lni lni-twitter-original"></i></a></li>
+									<li><a href="javascript:void(0)"><i
+											class="lni lni-youtube"></i></a></li>
+									<li><a href="javascript:void(0)"><i
+											class="lni lni-linkedin-original"></i></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Footer Middle -->
+	</footer>
+	<!--/ End Footer Area -->
+
+	<!-- ========================= scroll-top ========================= -->
+	<a href="#" class="scroll-top btn-hover"> <i
+		class="lni lni-chevron-up"></i>
+	</a>
+
+	<!-- ========================= JS here ========================= -->
+	<script src="<%=request.getContextPath()%>/assets/js/bootstrap.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/wow.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/tiny-slider.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/glightbox.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
+</body>
+
+</html>

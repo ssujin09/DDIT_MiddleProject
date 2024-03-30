@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mypage">
+	<resultMap type="CmmntyVO" id="community">
+		<result property="cmmntyCode" 	   column="CMMNTY_CODE"/>
+		<result property="cmmntyTitle" 	   column="CMMNTY_TITLE"/>
+		<result property="cmmntyContent"   column="CMMNTY_CONTENT"/>
+		<result property="cmmntyDate" 	   column="CMMNTY_DATE"/>
+		<result property="cmmntyCount" 	   column="CMMNTY_COUNT"/>
+		<result property="cmmntyLike" 	   column="CMMNTY_LIKE"/>
+		<result property="cmmntyReport"    column="CMMNTY_REPORT"/>
+		<result property="cstmrId" 		   column="CSTMR_ID"/>
+	</resultMap>
+	
+	
+	
+	
+	<update id="cstmrProfileSetting" parameterType="CustomerVO">
+		update customer
+		set 
+		<trim suffixOverrides=",">
+		<if test="cstmrName !=null and cstmrName != ''">
+		cstmr_name= #{cstmrName},
+		</if>
+		<if test="cstmrPw !=null and cstmrPw != ''">
+		cstmr_pw= #{cstmrPw},
+		</if>
+		<if test="cstmrNick !=null and cstmrNick != ''">
+		cstmr_nick= #{cstmrNick}, 
+		</if>
+		<if test="cstmrEmail !=null and cstmrEmail != ''">
+		cstmr_email = #{cstmrEmail},
+		</if>
+		<if test="cstmrAddr !=null and cstmrAddr != ''">
+		cstmr_addr = #{cstmrAddr}, 
+		</if>
+		<if test="cstmrPhone !=null and cstmrPhone != ''">
+		cstmr_phone = #{cstmrPhone},
+		</if>
+		<if test="profileImgNo != 0 ">
+		profile_img_no = #{profileImgNo},
+		</if>
+		</trim>
+		where cstmr_id = #{cstmrId}
+	</update>
+	
+	<insert id="cstmrProfileImgInsert" parameterType="ProfileImgVO">
+		insert into profile_img(PROFILE_IMG_NO,PROFILE_IMG_NAME, PROFILE_IMG_COURS, PROFILE_IMG_EXSTN)
+        values(profile_img_seq.nextval, #{profileImgName}, #{profileImgCours}, #{profileImgExstn})
+	</insert>
+	
+	<select id="cstmrProfileImgGet" parameterType="ProfileImgVO" resultType="int">
+		select profile_img_no as profileImgNo from profile_img
+			where profile_img_name = #{profileImgName} and profile_img_cours = #{profileImgCours} and profile_img_exstn = #{profileImgExstn}
+		
+	</select>
+	
+	<select id="profileImgInfo" parameterType="int" resultType="ProfileImgVo">
+		select profile_img_name as profileImgName , 
+		profile_img_cours as profileImgCours, 
+		profile_img_exstn as profileImgExstn
+		 from
+		 profile_img where profile_img_no = #{profileImgNo}
+	</select>
+	
+	<select id="getMyCommunity" parameterType="String" resultType="List">
+		select CMMNTY_CODE, CMMNTY_TITLE, CMMNTY_CONTENT,
+				CMMNTY_DATE, CMMNTY_COUNT, CMMNTY_LIKE,
+				CMMNTY_REPORT, CSTMR_ID
+		from 	COMMUNITY
+		where	CSTMR_ID = #{cstmrId}
+	</select>
+
+</mapper>

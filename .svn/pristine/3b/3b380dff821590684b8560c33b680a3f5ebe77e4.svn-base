@@ -1,0 +1,50 @@
+package admin.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.ibatis.exceptions.PersistenceException;
+import org.apache.ibatis.session.SqlSession;
+
+import admin.vo.CmmntyVO;
+import util.MyBatisUtil;
+
+public class ReportDaoImpl implements IReportDao{
+	
+	private static IReportDao reportDao;
+
+	private ReportDaoImpl() {
+	};
+
+	public static IReportDao getInstance() {
+		if (reportDao == null) {
+			reportDao = new ReportDaoImpl();
+		}
+		return reportDao;
+	}
+
+	@Override
+	public List<CmmntyVO> getReportPostList() {
+
+		List<CmmntyVO> reportPostList = new ArrayList<CmmntyVO>();
+		
+		SqlSession sqlSession = MyBatisUtil.getInstance(true);
+		
+		try {
+			
+			reportPostList=sqlSession.selectList("admin.reportPostList");
+			
+		} catch (PersistenceException e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		
+		
+		return reportPostList;
+	}
+	
+	
+
+
+}

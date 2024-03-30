@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="restaurant">
+
+
+	<select id="getRestaurant" parameterType="int"
+		resultType="RestaurantVO">
+		select
+		rstrnt_code,
+		rstrnt_name,
+		rstrnt_addr,
+		rstrnt_tel,
+		rstrnt_score,
+		rstrnt_like,
+		rstrnt_tag,
+		ctgry_code
+		from restaurant
+		where
+		rstrnt_code = #{rstrntCode}
+	</select>
+
+	<select id="getLocal" parameterType="String" resultType="String">
+
+		select
+		rstrnt_addr
+		from restaurant
+		where rstrnt_code = #{rstrntCode}
+
+	</select>
+
+	<select id="displayBsn" parameterType="int"
+		resultType="BusinessVO">
+
+		select
+		BSN_CODE,
+		BSN_OPENTIME,
+		BSN_CLOSETIME,
+		BSN_RESTSTART,
+		BSN_RESTFINISH,
+		RSTRNT_CODE
+		from business
+		where RSTRNT_CODE = #{rstrntCode}
+
+	</select>
+
+	<select id="displayMenu" parameterType="int" resultType="MenuVO">
+
+		select
+		MENU_CODE,
+		MENU_NAME,
+		MENU_PRICE,
+		RSTRNT_CODE
+		from menu
+		where RSTRNT_CODE = #{rstntCode}
+
+	</select>
+
+
+	
+	<select id="getRstrntList" parameterType="map" resultType="RestaurantVO">
+	<![CDATA[
+		select rstrnt_code, rstrnt_name, rstrnt_addr, rstrnt_tel
+		from restaurant
+		where rstrnt_addr like #{sido} || '%' and instr(rstrnt_addr, #{detail}) > 0
+       ]]>
+	
+	</select>
+
+	<select id="getRestaurantList" resultType="RestaurantVO">
+		select 		
+		rstrnt_code,
+		rstrnt_name,
+		rstrnt_addr,
+		rstrnt_tel,
+		rstrnt_score,
+		rstrnt_like,
+		rstrnt_tag,
+		ctgry_code from restaurant where rstrnt_addr like '%대전%'
+									and ctgry_code = #{ctgryCode}
+	</select>
+	<select id="getRestaurantInfo" parameterType="map" resultType="RestaurantVO">
+	
+    SELECT DISTINCT r.rstrnt_code, r.rstrnt_name, r.rstrnt_addr, r.rstrnt_tel, 
+    r.rstrnt_score, r.rstrnt_like, r.rstrnt_tag, r.ctgry_code, r.rstrnt_del
+    FROM restaurant r
+    JOIN menu m ON r.rstrnt_code = m.rstrnt_code
+    WHERE
+        (#{menuName} IS NULL OR UPPER(m.menu_name) LIKE UPPER('%' || #{menuName} || '%'))
+        AND (#{location} IS NULL OR UPPER(r.rstrnt_addr) LIKE UPPER('%' || #{location} || '%'))
+        AND (#{rstrntName} IS NULL OR UPPER(r.rstrnt_name) LIKE UPPER('%' || #{rstrntName} || '%'))
+        and r.rstrnt_del is null
+        
+	</select>
+
+	<select id="getRstrntFile" parameterType="String" resultType="ReviewImgVO">
+
+		SELECT f.review_file_path, f.review_file_name, f.review_file_extsn
+		FROM review r
+		JOIN review_file f ON r.review_no = f.review_no
+		WHERE r.rstrnt_code = #{rstrntCode} and rownum = 1
+
+	</select>
+
+
+</mapper>

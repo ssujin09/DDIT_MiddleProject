@@ -1,0 +1,73 @@
+package mypage.service;
+
+
+import java.util.List;
+
+import community.vo.CmmntyVO;
+import member.vo.CustomerVO;
+import mypage.dao.IMypageDao;
+import mypage.dao.MypageDaoImpl;
+import mypage.vo.ProfileImgVO;
+
+/**
+ * Description : 마이페이지 서비스 작업을 위해 마이페이지 인터페이스를 임플리먼트한 클래스
+ * Date : 2024. 1. 10
+ * History :
+ * - 작성자 : '선민수', 날짜 : 2024. 1. 10, 설명 : 최초작성
+ * - 수정자 : 
+ * @author PC-09
+ */
+public class MypageServiceImple implements IMypageService{
+	
+	IMypageDao mypageDao = MypageDaoImpl.getInstance();
+	
+	private static IMypageService singleTon = null;
+
+	private MypageServiceImple() {
+	};
+
+	public static IMypageService getInstance() {
+		if (singleTon == null) {
+			singleTon = new MypageServiceImple();
+		}
+		return singleTon;
+	}
+
+	@Override
+	public int cstmrProfileSetting(CustomerVO cv) {
+		
+		
+		
+		return mypageDao.cstmrProfileSetting(cv);
+	}
+
+	@Override
+	public int cstmrProfileImgInsert(ProfileImgVO piv) {
+		
+		
+		return mypageDao.cstmrProfileImgInsert(piv);
+	}
+
+	public int cstmrProfileImgGet(ProfileImgVO img) {
+		
+		return mypageDao.cstmrProfileImgGet(img);
+	}
+
+	@Override
+	public ProfileImgVO profileImgInfo(int profileImgNo) {
+		ProfileImgVO img = mypageDao.profileImgInfo(profileImgNo);
+		return img;
+	}	
+
+	@Override
+	public List<CmmntyVO> getMyCommunity(String cstmrId) {
+
+		return mypageDao.getMyCommunity(cstmrId);
+	}
+
+	@Override
+	public int postDelete(int cmmntyCode) {
+		return mypageDao.postDelete(cmmntyCode);
+	}
+
+}

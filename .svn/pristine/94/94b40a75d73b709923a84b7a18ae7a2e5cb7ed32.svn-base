@@ -1,0 +1,32 @@
+package restaurant.service;
+
+import restaurant.dao.FavortieDao;
+import restaurant.dao.FavortieDaoImpl;
+import restaurant.vo.FavortieVO;
+
+public class FavortieServiceImpl implements FavortieService {
+	
+	private static FavortieService singleTon = null;
+
+	private FavortieServiceImpl() {
+	};
+
+	public static FavortieService getInstance() {
+		if (singleTon == null) {
+			singleTon = new FavortieServiceImpl();
+		}
+		return singleTon;
+	}
+	
+	FavortieDao dao = FavortieDaoImpl.getInstance();
+
+	@Override
+	public FavortieVO displayFavortie(int favortieNo) {
+		
+		FavortieVO fv = dao.displayFavortie(favortieNo);
+		
+		return fv;
+	}
+	
+
+}
